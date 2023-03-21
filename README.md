@@ -37,5 +37,10 @@ nmp start
 
 ### Demo Login:
 
-- Email : DemoLogin@gmail.com
-- Password : DemoLogin
+- Email : regular@gmail.com
+- Email : business@gmail.com
+- Email : admin@gmail.com
+
+- Password : Aa1234
+
+!

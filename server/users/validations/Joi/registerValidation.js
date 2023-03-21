@@ -11,18 +11,18 @@ const registerValidation = (user) => {
       .required(),
     isBusiness: Joi.boolean().required(),
     phone: Joi.string()
-      .ruleSet.regex(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/)
+      .ruleset.regex(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/)
 
       .rule({ message: 'user "phone" mast be a valid phone number' })
       .required(),
     email: Joi.string()
-      .ruleSet.pattern(
+      .ruleset.pattern(
         /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
       )
       .rule({ message: 'user "mail" mast be a valid mail' })
       .required(),
     password: Joi.string()
-      .ruleSet.regex(
+      .ruleset.regex(
         /((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*-]{1}).{7,20})/
       )
       .rule({
@@ -33,7 +33,7 @@ const registerValidation = (user) => {
     image: Joi.object()
       .keys({
         url: Joi.string()
-          .ruleSet.regex(
+          .ruleset.regex(
             /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
           )
           .rule({ message: "user image mast be a valid url" })

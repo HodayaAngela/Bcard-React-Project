@@ -25,15 +25,16 @@ const useForm = (initialForm, schema, handleSubmit) => {
     ({ target }) => {
       const { name, value } = target;
       const errorMessage = validateProperty(target);
-      if (errorMessage) setErrors(prev => ({ ...prev, [name]: errorMessage }));
+      if (errorMessage)
+        setErrors((prev) => ({ ...prev, [name]: errorMessage }));
       else
-        setErrors(prev => {
+        setErrors((prev) => {
           let obj = { ...prev };
           delete obj[name];
           return obj;
         });
 
-      setData(prev => ({ ...prev, [name]: value }));
+      setData((prev) => ({ ...prev, [name]: value }));
     },
     [validateProperty]
   );
@@ -41,7 +42,7 @@ const useForm = (initialForm, schema, handleSubmit) => {
   const validateForm = useCallback(() => {
     const schemaForValidate = Joi.object(schema);
     const { error } = schemaForValidate.validate(data);
-    if (error) return error;
+    if (error) return error.message;
     return null;
   }, [schema, data]);
 

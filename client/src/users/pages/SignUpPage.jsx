@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import useForm from "../../forms/hooks/useForm";
 import useUsers from "../hooks/useUsers";
 import initialSignUpForm from "../helpers/initialForms/initialSignUpForm";
-import signUpSchema from "../models/joi-schema/signUpSchema";
+import signupSchema from "../models/joi-schema/signupSchema";
 import UserForm from "../components/UserForm";
 
 const SignUpPage = () => {
@@ -14,7 +14,7 @@ const SignUpPage = () => {
 
   const { value, ...rest } = useForm(
     initialSignUpForm,
-    signUpSchema,
+    signupSchema,
     handleSignUp
   );
 
