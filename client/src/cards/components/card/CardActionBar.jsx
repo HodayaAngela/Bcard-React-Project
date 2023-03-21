@@ -1,0 +1,110 @@
+import React, { useState } from "react";
+import { Box, IconButton } from "@mui/material";
+import CardActions from "@mui/material/CardActions";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import CallIcon from "@mui/icons-material/Call";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { arrayOf, func, string } from "prop-types";
+import { useUser } from "../../../users/providers/UserProvider";
+import CardDeleteDialog from "./CardDeleteDialog";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../../routes/routesModel";
+import useCards from "../../hooks/useCards";
+
+const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
+  const { user } = useUser();
+  const navigate = useNavigate();
+  const { handleLikeCard } = useCards();
+  const [isDialogOpen, setDialog] = useState(false);
+  const [isLiked, setLike] = useState(
+    () => !!cardLikes.find((id) => id === user?._id)
+  );
+
+  const handleDialog = (term) => {
+    if (term === "open") return setDialog(true);
+    setDialog(false);
+  };
+
+  const handleDeleteCard = () => {
+    handleDialog();
+    onDelete(cardId);
+  };
+
+  const handleLike = async () => {
+    setLike((prev) => !prev);
+    await handleLikeCard(cardId);
+    onLike();
+  };
+
+  return (
+    <>
+      <CardActions
+        disableSpacing
+        sx={{ pt: 0, justifyContent: "space-between" }}
+      >
+        <Box>
+          {/* {(user._id === userId || user.isAdmin) && ( */}
+
+          {/* 5.3 + 5.4 */}
+          {user &&
+            (user.isAdmin || (user.isBusiness && user._id === userId)) && (
+              <IconButton
+                aria-label="delete card"
+                onClick={() => handleDialog("open")}
+              >
+                <DeleteIcon />
+              </IconButton>
+            )}
+          {/* <CardDeleteDialog
+            isDialogOpen={isDialogOpen}
+            onChangeDialog={handleDialog}
+            onDelete={handleDeleteCard}
+          /> */}
+
+          {/* {user._id === userId && ( */}
+
+          {/* 5.3 +5.4 */}
+          {user &&
+            ((user.isAdmin && user._id === userId) ||
+              (user.isBusiness && user._id === userId)) && (
+              <IconButton
+                aria-label="edit card"
+                onClick={() => navigate(`${ROUTES.EDIT_CARD}/${cardId}`)}
+              >
+                <EditIcon />
+              </IconButton>
+            )}
+        </Box>
+
+        <Box>
+          <IconButton aria-label="call business">
+            <CallIcon />
+          </IconButton>
+
+          {/* 5.2 */}
+          {user && !user.isAdmin && !user.isBusiness && (
+            <IconButton aria-label="add to favorites" onClick={handleLike}>
+              <FavoriteIcon color={isLiked ? "error" : "inherit"} />
+            </IconButton>
+          )}
+        </Box>
+      </CardActions>
+
+      <CardDeleteDialog
+        isDialogOpen={isDialogOpen}
+        onChangeDialog={handleDialog}
+        onDelete={handleDeleteCard}
+      />
+    </>
+  );
+};
+
+CardActionBar.propTypes = {
+  cardId: string.isRequired,
+  onDelete: func.isRequired,
+  onLike: func.isRequired,
+  userId: string.isRequired,
+  cardLikes: arrayOf(string).isRequired,
+};
+export default CardActionBar;
