@@ -41,6 +41,4 @@ nmp start
 - Email : business@gmail.com
 - Email : admin@gmail.com
 
-- Password : Aa1234
-
-!
+- Password : Aa1234!
