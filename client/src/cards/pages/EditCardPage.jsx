@@ -5,14 +5,13 @@ import { useUser } from "../../users/providers/UserProvider";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import useForm from "../../forms/hooks/useForm";
 import normalizeCard from "../helpers/normalization/normalizeCard";
-import cardSchema from "../models/joi-schemas/cardSchema";
-import initialCardForm from "../helpers/initialForms/initialCardForm";
-import ROUTES from "../../routes/routesModel";
 import mapCardToModel from "../helpers/normalization/mapCardToModel";
-import { Container } from "@mui/system";
-import Form from "../../forms/components/Form";
-import Input from "../../forms/components/Input";
-import useCards from "../hooks/useCards";
+import initialCardForm from "./../helpers/initialForms/initialCardForm";
+import cardSchema from "../models/joi-schemas/cardSchema";
+import useCards from "./../hooks/useCards";
+import ROUTES from "../../routes/routesModel";
+import { Container } from "@mui/material";
+import CardForm from "../components/CardForm";
 
 const EditCardPage = () => {
   // Dynamic secondary routing
@@ -40,40 +39,29 @@ const EditCardPage = () => {
       const modeledCard = mapCardToModel(data);
       rest.setData(modeledCard);
     });
-  }, []);
+  }, [cardId, handleGetCard, navigate, rest, user._id]);
 
   if (!user) return <Navigate replace to={ROUTES.CARDS} />;
-
   return (
     <Container
       sx={{
-        padding: 8,
+        paddingTop: 8,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Form
+      <CardForm
+        title="Edit Card"
         onSubmit={rest.onSubmit}
         onReset={rest.handleReset}
-        onChange={rest.validateForm}
-        styles={{ maxWidth: "800px" }}
-        to={ROUTES.CARDS}
-        title="Edit card"
-      >
-        <Input
-          label="title"
-          name="title"
-          error={value.errors.title}
-          onChange={rest.handleChange}
-          data={value.data}
-          sm={12}
-        />
-      </Form>
+        errors={value.errors}
+        onFormChange={rest.validateForm}
+        onInputChange={rest.handleChange}
+        data={value.data}
+      />
     </Container>
   );
 };
-
-// EditCardPage.propTypes = {};
 
 export default EditCardPage;
