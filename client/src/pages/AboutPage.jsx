@@ -2,15 +2,14 @@ import React from "react";
 import Container from "@mui/material/Container";
 import PageHeader from "./../components/PageHeader";
 import Grid from "@mui/material/Grid";
-import "../cards/pages/CardsPage.css";
 
 const AboutPage = () => {
   return (
     <Container maxWidth="lg">
-      <PageHeader title={<h1 className="center-title">About Page</h1>} />
+      <PageHeader title="About Page" />
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={8} alignSelf="center">
+        <Grid item md={7} alignSelf="center">
           Welcome to Biz Card, the premier destination for discovering the most
           successful businesses in Israel. Our platform is dedicated to
           showcasing the best and brightest companies that have made a
@@ -42,7 +41,7 @@ const AboutPage = () => {
         </Grid>
         <Grid
           item
-          xs={4}
+          md={5}
           sx={{
             display: { md: "flex", xs: "none" },
             justifyContent: "center",

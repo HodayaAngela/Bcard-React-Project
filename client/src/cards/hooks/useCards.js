@@ -63,6 +63,17 @@ const useCards = () => {
     }
   }, [snack]);
 
+  const handleGetCardsForLikes = useCallback(async () => {
+    // without snack
+    try {
+      setLoading(true);
+      const cards = await getCards();
+      requestStatus(false, null, cards);
+    } catch (error) {
+      requestStatus(false, error.message, null);
+    }
+  }, []);
+
   const handleGetCard = useCallback(async (cardId) => {
     try {
       setLoading(true);
@@ -132,7 +143,7 @@ const useCards = () => {
   const handleGetFavCards = useCallback(async () => {
     try {
       setLoading(true);
-      const cards = await handleGetCards();
+      const cards = await handleGetCardsForLikes();
       const favCards = cards.filter(
         (card) => !!card.likes.find((id) => id === user._id)
       );
@@ -140,20 +151,20 @@ const useCards = () => {
     } catch (error) {
       requestStatus(false, error.message, null);
     }
-  }, [user, handleGetCards]);
+  }, [user, handleGetCardsForLikes]);
 
   const handleLikeCard = useCallback(
     async (cardId) => {
       try {
         setLoading(true);
         const card = await changeLikeStatus(cardId);
-        // const cards = await handleGetFavCards();
+        const cards = await handleGetCardsForLikes();
         requestStatus(false, null, cards, card);
       } catch (error) {
         requestStatus(false, error.message, null);
       }
     },
-    [cards]
+    [handleGetCardsForLikes]
   );
 
   const value = useMemo(() => {

@@ -6,17 +6,16 @@ import useCards from "../hooks/useCards";
 import { Container } from "@mui/system";
 import PageHeader from "../../components/PageHeader";
 import CardsFeedback from "../components/CardsFeedback";
-import "../../cards/pages/CardsPage.css";
 
 const FavCardsPage = () => {
   const { user } = useUser();
   const { value, ...rest } = useCards();
   const { isLoading, error, cards } = value;
-  const { handleDeleteCard, handleGetFavCards } = rest;
+  const { handleDeleteCard, handleGetFavCards, handleGetCardsForLikes } = rest;
 
   useEffect(() => {
     handleGetFavCards();
-  }, [handleGetFavCards]);
+  }, [user, handleGetCardsForLikes, handleGetFavCards]);
 
   const onDeleteCard = useCallback(
     async (cardId) => {
@@ -30,13 +29,14 @@ const FavCardsPage = () => {
     await handleGetFavCards();
   }, [handleGetFavCards]);
 
+  // 2.2 + 5.2
   if (!user || user.isAdmin || user.isBusiness)
     return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
     <Container>
       <PageHeader
-        title={<h1 className="center-title">Favorite Cards Page</h1>}
+        title="My Favorites"
         subtitle="Here you can find all your favorite business cards"
       />
       <CardsFeedback

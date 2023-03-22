@@ -2,11 +2,19 @@ import React from "react";
 import { string } from "prop-types";
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
+import { useTheme } from "../providers/ThemeProvider";
 
 const PageHeader = ({ title, subtitle }) => {
+  const { isDark } = useTheme();
   return (
     <>
-      <Typography variant="h2" component="h1">
+      <Typography
+        sx={{ color: isDark ? "white" : " rgba(1, 41, 16, 0.352)" }}
+        variant="h2"
+        fontWeight={"bold"}
+        component="h1"
+        textAlign={"center"}
+      >
         {title}
       </Typography>
       <Typography variant="h5" component="h2">
@@ -19,7 +27,7 @@ const PageHeader = ({ title, subtitle }) => {
 
 PageHeader.propTypes = {
   title: string.isRequired,
-  subtitle: string.isRequired,
+  subtitle: string,
 };
 
 export default PageHeader;

@@ -47,9 +47,14 @@ export const editCard = async (card) => {
   }
 };
 
-export const changeLikeStatus = async (cardId) => {
+export const changeLikeStatus = async (cardId, likeStatus) => {
+  if (!cardId) {
+    return Promise.reject("Card ID is undefined or null");
+  }
   try {
-    const { data } = await axios.patch(`${apiUrl}/cards/${cardId}`);
+    const { data } = await axios.patch(`${apiUrl}/cards/${cardId}`, {
+      like: likeStatus,
+    });
     return data;
   } catch (error) {
     return Promise.reject(error.message);

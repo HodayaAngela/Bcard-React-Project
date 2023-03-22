@@ -4,7 +4,6 @@ import PageHeader from "../../components/PageHeader";
 import CardsFeedback from "../components/CardsFeedback";
 import useCards from "./../hooks/useCards";
 // import { useUser } from "../../users/providers/UserProvider";
-import "./CardsPage.css";
 
 const CardsPage = () => {
   const { value, handleGetCards, handleDeleteCard, handleLikeCard } =
@@ -23,8 +22,8 @@ const CardsPage = () => {
   return (
     <Container>
       <PageHeader
-        title={<h1 className="center-title">Cards Page</h1>}
-        subtitle="On this page you can find all business cards form all categories"
+        title="Cards Page"
+        subtitle="Here are some of successful business cards in Israel:"
       />
 
       <CardsFeedback

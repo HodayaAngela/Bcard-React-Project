@@ -8,7 +8,6 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CardsFeedback from "../components/CardsFeedback";
 import useCards from "../hooks/useCards";
-import "../../cards/pages/CardsPage.css";
 
 const MyCardsPage = () => {
   const { user } = useUser();
@@ -32,7 +31,7 @@ const MyCardsPage = () => {
   return (
     <Container sx={{ position: "relative", minHeight: "92vh" }}>
       <PageHeader
-        title={<h1 className="center-title">My Cards Page</h1>}
+        title="My Cards Page"
         subtitle="Here you can find your business cards"
       />
 

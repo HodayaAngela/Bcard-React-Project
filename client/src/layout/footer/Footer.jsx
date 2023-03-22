@@ -16,14 +16,15 @@ const Footer = () => {
   return (
     <Paper
       sx={{ position: "sticky", bottom: 0, left: 0, right: 0 }}
-      elevation={3}>
+      elevation={3}
+    >
       <BottomNavigation showLabels>
         <BottomNavigationAction
           label="About"
           icon={<InfoIcon />}
           onClick={() => navigate(ROUTES.ABOUT)}
         />
-        {user && (
+        {user && !user.isBusiness && !user.isAdmin && (
           <BottomNavigationAction
             label="Favorites"
             icon={<FavoriteIcon />}
