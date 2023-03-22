@@ -8,7 +8,7 @@
     "test": "node test.js",
     "dev": "export || cross-env NODE_ENV=development&& nodemon ."
   },
-  "author": "David Yakin",
+  "author": "H",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

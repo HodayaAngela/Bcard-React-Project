@@ -10,7 +10,7 @@ import React from "react";
 
 // const RaisingEventChild = ({ onClick }) => {
 //   return (
-//     <button onClick={() => onClick("david")} style={{ padding: 4 }}>
+//     <button onClick={() => onClick("Hodaya")} style={{ padding: 4 }}>
 //       click
 //     </button>
 //   );

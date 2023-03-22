@@ -12,10 +12,11 @@ const LogoIcon = () => {
         size="large"
         edge="start"
         color="inherit"
-        aria-label="menu">
+        aria-label="menu"
+      >
         <Avatar
           alt="Business card icon"
-          src="/assets/images/business-card.png"
+          src="/assets/images/businessIcon.avif"
         />
       </IconButton>
     </NavBarLink>

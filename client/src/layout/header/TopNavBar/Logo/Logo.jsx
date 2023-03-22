@@ -12,8 +12,9 @@ const Logo = () => {
           display: { xs: "none", md: "inline-flex" },
           marginRight: 2,
           fontFamily: "fantasy",
-        }}>
-        BCard
+        }}
+      >
+        Biz Card
       </Typography>
     </NavBarLink>
   );

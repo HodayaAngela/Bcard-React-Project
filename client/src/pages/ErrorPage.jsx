@@ -28,11 +28,7 @@ const ErrorPage = () => {
           </Button>
         </Grid>
         <Grid item xs={12} md={4} justifyContent="center">
-          <img
-            width="100%"
-            src="/assets/images/broken-robot.png"
-            alt="broken robot"
-          />
+          <img width="100%" src="/assets/images/404Error.jpg" alt="Error404" />
         </Grid>
       </Grid>
     </Container>

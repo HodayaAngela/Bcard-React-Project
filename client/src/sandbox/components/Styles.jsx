@@ -2,11 +2,11 @@ import React from "react";
 import "./styles.css";
 
 const Styles = ({ sx = {} }) => {
-  const isGreen = true;
+  // const isGreen = true;
   // const isGreen = false;
   // const grayStyle = { backgroundColor: "gray" };
 
-  // const obj = { name: "david" };
+  // const obj = { name: "Hodaya" };
   // const second = { ...obj };
   // const objX = second;
   // second.key = "3";

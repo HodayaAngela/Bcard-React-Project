@@ -19,7 +19,7 @@ export const NameProvider = ({ children }) => {
   const [name, setName] = useState();
 
   useEffect(() => {
-    setName("david");
+    setName("Hodaya");
   }, []);
 
   return (

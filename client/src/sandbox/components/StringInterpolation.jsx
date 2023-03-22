@@ -4,7 +4,7 @@ const StringInterpolation = () => {
   //   console.log("in logic place in the component");
   const text = "hallo";
   console.log(text);
-  const obj = { name: "david" };
+  const obj = { name: "Hodaya" };
   //   return <div>{text + " " + (2 + 1)}</div>;
   return <div>{obj.name}</div>;
 };

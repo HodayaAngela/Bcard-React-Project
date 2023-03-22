@@ -7,6 +7,7 @@ import { Container } from "@mui/system";
 import PageHeader from "../../components/PageHeader";
 import CardsFeedback from "../components/CardsFeedback";
 // import { useNavigate } from "react-router-dom";
+import "../../cards/pages/CardsPage.css";
 
 const FavCardsPage = () => {
   // const { user } = useUser();
@@ -37,7 +38,7 @@ const FavCardsPage = () => {
   return (
     <Container>
       <PageHeader
-        title="Favorite Cards Page"
+        title={<h1 className="center-title">Favorite Cards Page</h1>}
         subtitle="Here you can find all your favorite business cards"
       />
       <CardsFeedback
