@@ -17,9 +17,16 @@ const Cards = ({ cards, onDelete, onLike }) => {
     );
 
   return (
-    <Grid container spacing={2} pb={2}>
+    <Grid
+      container
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+      spacing={5}
+      p={4}
+    >
       {cards.map((card) => (
-        <Grid item key={card._id} xs={12} sm={6} md={4} lg={3}>
+        <Grid item key={card._id} xs={12} sm={6} md={4} lg={4}>
           <Card card={card} onDelete={onDelete} onLike={onLike} />
         </Grid>
       ))}

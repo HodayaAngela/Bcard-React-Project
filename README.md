@@ -42,3 +42,10 @@ nmp start
 - Email : admin@gmail.com
 
 - Password : Aa1234!
+
+### Display of the application according to user type:
+
+- NON-not displayed: Fav Cards, My Cards & Sandbox
+- Regular-not displayed: My Cards & Sandbox
+- Business-not displayed: Fav Cards, Sandbox
+- Admin-not displayed: Fav Cards

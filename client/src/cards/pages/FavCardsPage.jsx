@@ -1,21 +1,18 @@
 import React, { useCallback, useEffect } from "react";
-// import { useUser } from "../../users/providers/UserProvider";
-// import { Navigate } from "react-router-dom";s
-// import ROUTES from "../../routes/routesModel";
+import { useUser } from "../../users/providers/UserProvider";
+import { Navigate } from "react-router-dom";
+import ROUTES from "../../routes/routesModel";
 import useCards from "../hooks/useCards";
 import { Container } from "@mui/system";
 import PageHeader from "../../components/PageHeader";
 import CardsFeedback from "../components/CardsFeedback";
-// import { useNavigate } from "react-router-dom";
 import "../../cards/pages/CardsPage.css";
 
 const FavCardsPage = () => {
-  // const { user } = useUser();
+  const { user } = useUser();
   const { value, ...rest } = useCards();
   const { isLoading, error, cards } = value;
   const { handleDeleteCard, handleGetFavCards } = rest;
-
-  // const navigate = useNavigate();
 
   useEffect(() => {
     handleGetFavCards();
@@ -33,7 +30,8 @@ const FavCardsPage = () => {
     await handleGetFavCards();
   }, [handleGetFavCards]);
 
-  // if (!user) return <Navigate replace to={ROUTES.CARDS} />;
+  if (!user || user.isAdmin || user.isBusiness)
+    return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
     <Container>
