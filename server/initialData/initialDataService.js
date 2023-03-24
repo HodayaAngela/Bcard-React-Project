@@ -8,10 +8,10 @@ const { generateUserPassword } = require("../users/helpers/bcrypt");
 
 const generateInitialCards = async () => {
   const { cards } = data;
-  cards.forEach(async card => {
+  cards.forEach(async (card) => {
     try {
-      const userId = "6376274068d78742d84f31d2";
-      card = await normalizeCard(card, userId);
+      const cardUserId = "6376274068d78742d84f31d2";
+      card = await normalizeCard(card, cardUserId);
       await createCard(card);
       return;
     } catch (error) {
@@ -22,7 +22,7 @@ const generateInitialCards = async () => {
 
 const generateInitialUsers = async () => {
   const { users } = data;
-  users.forEach(async user => {
+  users.forEach(async (user) => {
     try {
       user = await normalizeUser(user);
       user.password = generateUserPassword(user.password);

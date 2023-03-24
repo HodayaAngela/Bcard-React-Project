@@ -17,27 +17,27 @@ const EditCardPage = () => {
   const { handleUpdateCard, handleGetCard, card } = useCards();
 
   // Dynamic secondary routing
-  const { cardId } = useParams();
+  const { id } = useParams();
 
   const navigate = useNavigate();
   const { user } = useUser();
 
   const { value, ...rest } = useForm(initialCardForm, cardSchema, () => {
-    if (card && card._id) {
-      handleUpdateCard(card._id, {
-        ...normalizeCard({ ...value.data }),
-        user_id: card.user_id,
-      });
-    }
+    handleUpdateCard(card._id, {
+      ...normalizeCard({ ...value.data }),
+      bizNumber: card.bizNumber,
+      user_id: card.user_id,
+    });
   });
 
+  // .preventDefault();
   useEffect(() => {
-    handleGetCard(cardId).then((data) => {
-      if (user._id !== data.user_id) navigate(ROUTES.CARDS);
-      const modeledCard = mapCardToModel(data).preventDefault();
+    handleGetCard(id).then((data) => {
+      if (!user || user._id !== data.user_id) navigate(ROUTES.CARDS);
+      const modeledCard = mapCardToModel(data);
       rest.setData(modeledCard);
     });
-  }, [cardId, handleGetCard, navigate, rest, user._id]);
+  }, [id, handleGetCard, navigate, rest, user]);
 
   // if (!user) return <Navigate replace to={ROUTES.CARDS} />;
   return (
@@ -51,7 +51,7 @@ const EditCardPage = () => {
     >
       <CardForm
         title="Edit Card"
-        onSubmit={rest.onSubmitForEdit}
+        onSubmit={rest.onSubmit}
         onReset={rest.handleReset}
         errors={value.errors}
         onFormChange={rest.validateForm}

@@ -37,7 +37,7 @@ const Card = ({ card, onDelete, onLike }) => {
         cardId={card._id}
         onDelete={onDelete}
         onLike={onLike}
-        userId={card.user_id}
+        cardUserId={card.user_id}
         cardLikes={card.likes}
       />
     </MuiCard>

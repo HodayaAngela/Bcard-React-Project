@@ -13,12 +13,12 @@ import normalizeCard from "./../helpers/normalization/normalizeCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSnack } from "../../providers/SnackbarProvider";
 import ROUTES from "../../routes/routesModel";
-// import { useUser } from "../../users/providers/UserProvider";
+import { useUser } from "../../users/providers/UserProvider";
 import { useEffect } from "react";
 // import { getFavoriteCards } from "../../../../server/cards/models/cardsAccessDataService";
 
 const useCards = () => {
-  // const { user } = useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -141,19 +141,19 @@ const useCards = () => {
     [cards, snack]
   );
 
-  const handleGetFavCards = useCallback(
-    async (userId) => {
-      try {
-        setLoading(true);
-        const cards = await handleGetCards(userId);
-        const favCards = cards.filter((card) => card.likes.includes(userId));
-        requestStatus(false, null, favCards);
-      } catch (error) {
-        requestStatus(false, error.message, null);
-      }
-    },
-    [handleGetCards]
-  );
+  const handleGetFavCards = useCallback(async () => {
+    try {
+      setLoading(true);
+      // const cards = await handleGetCards(cardUserId);
+      const cards = await getCards();
+      const favCards = cards.filter(
+        (card) => !!card.likes.find((id) => id === user._id)
+      );
+      requestStatus(false, null, favCards);
+    } catch (error) {
+      requestStatus(false, error.message, null);
+    }
+  }, [user]);
 
   const handleLikeCard = useCallback(
     async (cardId) => {

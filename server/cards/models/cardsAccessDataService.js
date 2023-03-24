@@ -16,10 +16,10 @@ const getCards = async () => {
   return Promise.resolve("get cards not in mongodb");
 };
 
-const getMyCards = async (userId) => {
+const getMyCards = async (cardUserId) => {
   if (DB === "MONGODB") {
     try {
-      const cards = await Card.find({ user_id: userId });
+      const cards = await Card.find({ user_id: cardUserId });
       return Promise.resolve(cards);
     } catch (error) {
       error.status = 404;
@@ -29,10 +29,10 @@ const getMyCards = async (userId) => {
   return Promise.resolve("get card not in mongodb");
 };
 
-const getCard = async (cardId) => {
+const getCard = async (cardUserId) => {
   if (DB === "MONGODB") {
     try {
-      let card = await Card.findById(cardId);
+      let card = await Card.findById(cardUserId);
       if (!card) throw new Error("Could not find this card in the database");
       return Promise.resolve(card);
     } catch (error) {
@@ -76,22 +76,22 @@ const updateCard = async (cardId, normalizedCard) => {
   return Promise.resolve("card updateCard not in mongodb");
 };
 
-const likeCard = async (cardId, userId) => {
+const likeCard = async (cardId, cardUserId) => {
   if (DB === "MONGODB") {
     try {
       let card = await Card.findById(cardId);
       if (!card)
         throw new Error("A card with this ID cannot be found in the database");
 
-      const cardLikes = card.likes.find((id) => id === userId);
+      const cardLikes = card.likes.find((id) => id === cardUserId);
 
       if (!cardLikes) {
-        card.likes.push(userId);
+        card.likes.push(cardUserId);
         card = await card.save();
         return Promise.resolve(card);
       }
 
-      const cardFiltered = card.likes.filter((id) => id !== userId);
+      const cardFiltered = card.likes.filter((id) => id !== cardUserId);
       card.likes = cardFiltered;
       card = await card.save();
       return Promise.resolve(card);
@@ -111,7 +111,7 @@ const deleteCard = async (cardId, user) => {
       if (!card)
         throw new Error("A card with this ID cannot be found in the database");
 
-      if (!user.isAdmin && !user.isBusiness && !user._id === userId)
+      if (!user.isAdmin && !user.isBusiness && !user._id === cardUserId)
         throw new Error(
           "Authorization Error: Only the user who created the business card or admin can delete this card"
         );

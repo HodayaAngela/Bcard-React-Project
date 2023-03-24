@@ -64,3 +64,4 @@ nmp start
 
 - not displayed: Fav Cards
 - Can delete any Card
+- Can create a card and edit only what he created

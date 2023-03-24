@@ -12,15 +12,16 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 import useCards from "../../hooks/useCards";
 
-const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
+const CardActionBar = ({ onDelete, cardId, cardLikes, onLike, cardUserId }) => {
   // userFromLocalStorage:
   const { user } = useUser();
-  // userId:
+
+  // cardUserId:
   // <CardActionBar
   //       cardId={card._id}
   //       onDelete={onDelete}
   //       onLike={onLike}
-  //       userId={card.user_id}
+  //       cardUserId={card.user_id}
   //       cardLikes={card.likes}
   //     />
 
@@ -54,7 +55,7 @@ const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
     onLike();
   };
 
-  // console.log(user._id, userId);
+  // console.log(user._id, cardUserId);
 
   return (
     <>
@@ -66,7 +67,7 @@ const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
           {/* 5.3 + 5.4 */}
 
           {user &&
-            (user.isAdmin || (user.isBusiness && user._id === userId)) && (
+            (user.isAdmin || (user.isBusiness && user._id === cardUserId)) && (
               <IconButton
                 aria-label="delete card"
                 onClick={() => handleDialog("open")}
@@ -77,8 +78,8 @@ const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
 
           {/* 5.3 +5.4 */}
           {user &&
-            ((user.isAdmin && user._id === userId) ||
-              (user.isBusiness && user._id === userId)) && (
+            ((user.isAdmin && user._id === cardUserId) ||
+              (user.isBusiness && user._id === cardUserId)) && (
               <IconButton
                 aria-label="edit card"
                 onClick={() => navigate(`${ROUTES.EDIT_CARD}/${cardId}`)}
@@ -115,7 +116,7 @@ CardActionBar.propTypes = {
   cardId: string.isRequired,
   onDelete: func.isRequired,
   onLike: func.isRequired,
-  userId: string.isRequired,
+  cardUserId: string.isRequired,
   cardLikes: arrayOf(string).isRequired,
 };
 export default CardActionBar;

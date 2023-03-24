@@ -18,7 +18,6 @@ const normalizeCard = (card) => {
       houseNumber: card.houseNumber,
       zip: card.zip,
     },
-    bizNumber: card.bizNumber,
   };
 };
 

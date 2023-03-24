@@ -19,7 +19,8 @@ const CardForm = ({
       errors={errors}
       onChange={onFormChange}
       styles={{ maxWidth: "800px" }}
-      title={title}>
+      title={title}
+    >
       <Input
         name="title"
         label="title"

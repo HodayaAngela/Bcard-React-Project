@@ -26,8 +26,8 @@ router.get("/", async (req, res) => {
 
 router.get("/my-cards", auth, async (req, res) => {
   try {
-    const userId = req.user._id;
-    const card = await getMyCards(userId);
+    const cardUserId = req.user._id;
+    const card = await getMyCards(cardUserId);
     return res.send(card);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
@@ -44,10 +44,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get("/favorites/:userId", auth, async (req, res) => {
+router.get("fav-cards/:cardUserId", auth, async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const cards = await getFavoriteCards(userId);
+    const cardUserId = req.params.userId;
+    const cards = await getFavoriteCards(cardUserId);
     return res.send(cards);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
@@ -79,9 +79,9 @@ router.put("/:id", auth, async (req, res) => {
   try {
     let card = req.body;
     const cardId = req.params.id;
-    const userId = req.user._id;
+    const cardUserId = req.user._id;
 
-    if (userId !== card.user_id) {
+    if (cardUserId !== card.user_id) {
       const message =
         "Authorization Error: Only the user who created the business card can update its details";
       return handleError(res, 403, message);
@@ -102,9 +102,9 @@ router.put("/:id", auth, async (req, res) => {
 router.patch("/:id", auth, async (req, res) => {
   try {
     const cardId = req.params.id;
-    const userId = req.user._id;
+    const cardUserId = req.user._id;
 
-    const card = await likeCard(cardId, userId);
+    const card = await likeCard(cardId, cardUserId);
     return res.send(card);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
