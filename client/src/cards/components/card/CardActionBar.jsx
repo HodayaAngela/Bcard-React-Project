@@ -13,9 +13,19 @@ import ROUTES from "../../../routes/routesModel";
 import useCards from "../../hooks/useCards";
 
 const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
+  // userFromLocalStorage:
   const { user } = useUser();
+  // userId:
+  // <CardActionBar
+  //       cardId={card._id}
+  //       onDelete={onDelete}
+  //       onLike={onLike}
+  //       userId={card.user_id}
+  //       cardLikes={card.likes}
+  //     />
+
   const navigate = useNavigate();
-  const { handleLikeCard } = useCards();
+  const { handleLikeCard } = useCards([]);
   const [isDialogOpen, setDialog] = useState(false);
   const [isLiked, setLike] = useState(
     () => !!cardLikes.find((id) => id === user?._id)
@@ -31,11 +41,20 @@ const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
     onDelete(cardId);
   };
 
+  // onDelete:
+  //CardsPage: const onDeleteCard = async (cardId) => {
+  //   await handleDeleteCard(cardId);
+  //   await handleGetCards();
+  // };
+  // handleDeleteCard:  useCards()
+
   const handleLike = async () => {
     setLike((prev) => !prev);
     await handleLikeCard(cardId);
     onLike();
   };
+
+  // console.log(user._id, userId);
 
   return (
     <>
@@ -44,9 +63,8 @@ const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
         sx={{ pt: 0, justifyContent: "space-between" }}
       >
         <Box>
-          {/* {(user._id === userId || user.isAdmin) && ( */}
-
           {/* 5.3 + 5.4 */}
+
           {user &&
             (user.isAdmin || (user.isBusiness && user._id === userId)) && (
               <IconButton
@@ -56,13 +74,6 @@ const CardActionBar = ({ cardId, onDelete, cardLikes, onLike, userId }) => {
                 <DeleteIcon />
               </IconButton>
             )}
-          {/* <CardDeleteDialog
-            isDialogOpen={isDialogOpen}
-            onChangeDialog={handleDialog}
-            onDelete={handleDeleteCard}
-          /> */}
-
-          {/* {user._id === userId && ( */}
 
           {/* 5.3 +5.4 */}
           {user &&

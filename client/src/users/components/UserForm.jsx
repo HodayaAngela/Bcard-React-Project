@@ -24,7 +24,8 @@ const UserForm = ({
       onChange={onFormChange}
       styles={{ maxWidth: "800px" }}
       title={title}
-      to={ROUTES.CARDS}>
+      to={ROUTES.CARDS}
+    >
       <Input
         name="first"
         label="first name"
@@ -148,7 +149,7 @@ const UserForm = ({
       />
       <Grid item>
         <FormControlLabel
-          onChange={e => {
+          onChange={(e) => {
             setData({ ...data, isBusiness: !!e.target.checked });
           }}
           name="isBusiness"

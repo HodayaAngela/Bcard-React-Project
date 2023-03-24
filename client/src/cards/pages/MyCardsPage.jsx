@@ -32,7 +32,7 @@ const MyCardsPage = () => {
     <Container sx={{ position: "relative", minHeight: "92vh" }}>
       <PageHeader
         title="My Cards Page"
-        subtitle="Here you can find your business cards"
+        subtitle="Welcome to our business card creator page, where you can easily access and manage your existing business cards and create new ones at your convenience."
       />
 
       {cards && (

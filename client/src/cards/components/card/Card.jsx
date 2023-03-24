@@ -13,7 +13,19 @@ const Card = ({ card, onDelete, onLike }) => {
   const navigate = useNavigate();
 
   return (
-    <MuiCard sx={{ minWidth: 280 }}>
+    <MuiCard
+      sx={{
+        minWidth: 280,
+        opacity: [0.9, 0.8, 0.7],
+        boxShadow: "0px 0px 10px 1px rgba(0,1,0,0.4)",
+        transition: "transform 0.3s ease-in-out",
+        "&:hover": {
+          opacity: 1,
+          boxShadow: 0,
+          transform: "translateY(-10px)",
+        },
+      }}
+    >
       <CardActionArea
         onClick={() => navigate(`${ROUTES.CARD_INFO}/${card._id}`)}
       >

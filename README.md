@@ -1,6 +1,7 @@
 # Web application with Rest Api
 
 React Project - client side with server side
+Designed primarily using Material Ui
 
 ## Technologies
 
@@ -57,7 +58,9 @@ nmp start
 #### Business:
 
 - not displayed: Fav Cards, Sandbox
+- Can delete his Cards
 
 #### Admin:
 
 - not displayed: Fav Cards
+- Can delete any Card

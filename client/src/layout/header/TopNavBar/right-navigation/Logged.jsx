@@ -13,7 +13,7 @@ const Logged = () => {
         sx={{ p: 0, display: "inline-flex", marginLeft: 2 }}
         onClick={setOpen}
       >
-        <Avatar alt="Bird" src="/assets/images/userProfile.jpg" />
+        <Avatar alt="Bird" src="/assets/images/userProfile.webp" />
       </IconButton>
     </Tooltip>
   );

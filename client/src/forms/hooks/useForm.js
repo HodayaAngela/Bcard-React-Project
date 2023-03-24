@@ -46,6 +46,14 @@ const useForm = (initialForm, schema, handleSubmit) => {
     return null;
   }, [schema, data]);
 
+  const onSubmitForEdit = useCallback(
+    (event) => {
+      event.preventDefault();
+      handleSubmit(data);
+    },
+    [handleSubmit, data]
+  );
+
   const onSubmit = useCallback(() => {
     handleSubmit(data);
   }, [handleSubmit, data]);
@@ -61,6 +69,7 @@ const useForm = (initialForm, schema, handleSubmit) => {
     handleReset,
     validateForm,
     setData,
+    onSubmitForEdit,
   };
 };
 

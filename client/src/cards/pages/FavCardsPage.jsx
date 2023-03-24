@@ -1,21 +1,22 @@
 import React, { useCallback, useEffect } from "react";
 import { useUser } from "../../users/providers/UserProvider";
-import { Navigate } from "react-router-dom";
-import ROUTES from "../../routes/routesModel";
+// import { Navigate } from "react-router-dom";
+// import ROUTES from "../../routes/routesModel";
 import useCards from "../hooks/useCards";
 import { Container } from "@mui/system";
 import PageHeader from "../../components/PageHeader";
 import CardsFeedback from "../components/CardsFeedback";
 
 const FavCardsPage = () => {
+  // Will be displayed to a regular user
   const { user } = useUser();
   const { value, ...rest } = useCards();
   const { isLoading, error, cards } = value;
-  const { handleDeleteCard, handleGetFavCards, handleGetCardsForLikes } = rest;
+  const { handleDeleteCard, handleGetFavCards } = rest;
 
   useEffect(() => {
     handleGetFavCards();
-  }, [user, handleGetCardsForLikes, handleGetFavCards]);
+  }, [user, handleGetFavCards]);
 
   const onDeleteCard = useCallback(
     async (cardId) => {
@@ -30,8 +31,8 @@ const FavCardsPage = () => {
   }, [handleGetFavCards]);
 
   // 2.2 + 5.2
-  if (!user || user.isAdmin || user.isBusiness)
-    return <Navigate replace to={ROUTES.CARDS} />;
+  // if (!user || user.isAdmin || user.isBusiness)
+  //   return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
     <Container>

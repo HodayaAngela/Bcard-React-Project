@@ -29,7 +29,9 @@ const CardDeleteDialog = ({ isDialogOpen, onDelete, onChangeDialog }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onChangeDialog} color="error"></Button>
+        <Button onClick={onChangeDialog} color="error">
+          Cancel
+        </Button>
         <Button onClick={onDelete} autoFocus color="info">
           Delete card
         </Button>

@@ -10,6 +10,7 @@ const {
   updateCard,
   likeCard,
   deleteCard,
+  getFavoriteCards,
 } = require("../models/cardsAccessDataService");
 const validateCard = require("../validations/cardValidationService");
 const router = express.Router();
@@ -38,6 +39,16 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params;
     const card = await getCard(id);
     return res.send(card);
+  } catch (error) {
+    return handleError(res, error.status || 500, error.message);
+  }
+});
+
+router.get("/favorites/:userId", auth, async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const cards = await getFavoriteCards(userId);
+    return res.send(cards);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
   }
