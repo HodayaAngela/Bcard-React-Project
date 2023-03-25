@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { useUser } from "../../users/providers/UserProvider";
-// import { Navigate } from "react-router-dom";
-// import ROUTES from "../../routes/routesModel";
+import { Navigate } from "react-router-dom";
+import ROUTES from "../../routes/routesModel";
 import useCards from "../hooks/useCards";
 import { Container } from "@mui/system";
 import PageHeader from "../../components/PageHeader";
@@ -31,8 +31,8 @@ const FavCardsPage = () => {
   }, [handleGetFavCards]);
 
   // 2.2 + 5.2
-  // if (!user || user.isAdmin || user.isBusiness)
-  //   return <Navigate replace to={ROUTES.CARDS} />;
+  if (!user || user.isAdmin || user.isBusiness)
+    return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
     <Container>
@@ -46,6 +46,7 @@ const FavCardsPage = () => {
         cards={cards}
         onDelete={onDeleteCard}
         onLike={changeLikeStatus}
+        title="You have not yet selected cards of your preference"
       />
     </Container>
   );

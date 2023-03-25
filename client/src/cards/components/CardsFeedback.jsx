@@ -7,14 +7,20 @@ import Cards from "./Cards";
 import cardType from "../models/types/cardType";
 // import cardType from "./../models/types/cardType";
 
-const CardsFeedback = ({ isLoading, error, cards, onDelete, onLike }) => {
+const CardsFeedback = ({
+  title,
+  isLoading,
+  error,
+  cards,
+  onDelete,
+  onLike,
+}) => {
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
   if (cards && !cards.length)
     return (
       <Typography variant="body1" color="initial">
-        Oops, there are no business cards in the database that match the
-        parameters you entered!
+        {title}
       </Typography>
     );
   if (cards) return <Cards cards={cards} onDelete={onDelete} onLike={onLike} />;

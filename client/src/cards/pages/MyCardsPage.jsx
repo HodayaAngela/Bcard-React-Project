@@ -54,6 +54,7 @@ const MyCardsPage = () => {
         error={error}
         cards={cards}
         onDelete={onDeleteCard}
+        title="Currently, you have not created a business card. However, you can create one by using the button below:"
       />
     </Container>
   );

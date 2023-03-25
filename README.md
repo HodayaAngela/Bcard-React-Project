@@ -1,13 +1,14 @@
-# Web application with Rest Api
+# Business Card Web Application with REST API
 
-React Project - client side with server side
-Designed primarily using Material Ui
+This is a web application developed using React on the client-side and Node.js on the server-side. The application is designed to display business cards, with the option to edit and delete them. Users can also view their favorite cards and more. The UI is primarily developed using Material UI.
 
 ## Technologies
 
+#### The following technologies have been used in this project:
+
 - Axios version 1.3.2
 - React-router-dom version 6.7.0
-- material UI version 5.11
+- Material UI version 5.11
 - jwt-decode version 3.1.2
 - joi version 17.8.1
 
@@ -17,7 +18,7 @@ Designed primarily using Material Ui
 
 ## installations
 
-To run this project, install it locally using npm
+To run this project, install it locally using npm:
 
 ### client side :
 
@@ -38,30 +39,34 @@ nmp start
 
 ### Demo Login:
 
+#### Use the following credentials to login:
+
 - Email : regular@gmail.com
 - Email : business@gmail.com
 - Email : admin@gmail.com
 
 - Password : Aa1234!
 
-## Display of the application according to user type:
+## User Privileges
 
-#### NON:
+### The application provides different privileges to users based on their role:
 
-- not displayed: Fav Cards, My Cards & Sandbox
+#### Non-registered users:
 
-#### Regular:
+- Cannot view favorite cards, my cards, and sandbox.
 
-- not displayed: My Cards & Sandbox
-- Can't delete Cards
+#### Regular users:
 
-#### Business:
+- Cannot view my cards and sandbox.
+- Cannot delete cards.
 
-- not displayed: Fav Cards, Sandbox
-- Can delete his Cards
+#### Business users:
 
-#### Admin:
+- Cannot view favorite cards and sandbox.
+- Can delete their own cards.
 
-- not displayed: Fav Cards
-- Can delete any Card
-- Can create a card and edit only what he created
+#### Admin users:
+
+- Cannot view favorite cards.
+- Can delete any card.
+- Can create and edit only the cards created by them.

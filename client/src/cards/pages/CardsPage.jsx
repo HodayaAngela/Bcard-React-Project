@@ -33,6 +33,7 @@ const CardsPage = () => {
         isLoading={isLoading}
         onDelete={onDeleteCard}
         onLike={handleLikeCard}
+        title="Oops, no business cards to show"
       />
     </Container>
   );
