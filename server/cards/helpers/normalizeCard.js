@@ -3,7 +3,7 @@ const generateBizNumber = require("./generateBizNumber");
 const normalizeCard = async (rawCard, cardUserId) => {
   const { url, alt } = rawCard.image;
   const image = {
-    url: url || "/assets/images/StockExchange.jpg",
+    url: url || "https://source.unsplash.com/random/?business",
     alt: alt || "Business card image",
   };
 

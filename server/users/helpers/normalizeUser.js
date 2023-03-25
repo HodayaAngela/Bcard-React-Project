@@ -5,7 +5,7 @@ const normalizeUser = (rawUser) => {
     ...rawUser.image,
     url:
       rawUser.image.url ||
-      "https://media.istockphoto.com/id/1406742992/photo/businessman-draws-increase-arrow-graph-corporate-future-growth-year-2022-to-2023-planning.jpg?b=1&s=170667a&w=0&k=20&c=hwhDfFSJET9J1A6mRK9sTJQn2hQs3Bo_kizTqasrPwA=",
+      "https://media.istockphoto.com/id/175436790/photo/user-icon.jpg?s=612x612&w=0&k=20&c=zMOlQqLGfjkM5Mx1W4yoxe5G78Hy3RGZ3wzszEpVuWc=",
     alt: rawUser.image.alt || "Business card image",
   };
 
