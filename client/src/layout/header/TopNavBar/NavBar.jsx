@@ -6,11 +6,19 @@ import LeftNavBar from "./left-navigations/LeftNavBar";
 import RightNavBar from "./right-navigation/RightNavBar";
 import SearchBar from "./right-navigation/SearchBar";
 import { MenuProvider } from "./menu/MenuProvider";
-
+import { createTheme } from "@mui/material/styles";
 export const NavBar = () => {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#004d40",
+      },
+    },
+  });
+
   return (
     <MenuProvider>
-      <AppBar position="sticky">
+      <AppBar position="sticky" theme={theme}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <LeftNavBar />
 
