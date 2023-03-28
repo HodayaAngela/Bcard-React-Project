@@ -62,7 +62,7 @@ const useCards = () => {
     } catch (error) {
       requestStatus(false, error.message, null);
     }
-  }, [snack]);
+  }, []);
 
   const handleGetCardsForLikes = useCallback(async () => {
     // without snack
@@ -97,18 +97,18 @@ const useCards = () => {
   }, []);
 
   const handleUpdateCard = useCallback(
-    async (cardId, cardFormClient) => {
+    async (cardId, cardFromClient) => {
       try {
         setLoading(true);
-        const card = await editCard(cardId, cardFormClient);
+        const card = await editCard(cardId, cardFromClient);
         requestStatus(false, null, null, card);
         snack("success", "The business card has been successfully updated");
         navigate(ROUTES.MY_CARDS);
       } catch (error) {
-        requestStatus(false, error.message, null);
+        requestStatus(false, error, null);
       }
     },
-    [snack, navigate]
+    [navigate, snack]
   );
 
   const handleCreateCard = useCallback(
@@ -183,6 +183,7 @@ const useCards = () => {
     handleUpdateCard,
     handleDeleteCard,
     handleLikeCard,
+    requestStatus,
   };
 };
 

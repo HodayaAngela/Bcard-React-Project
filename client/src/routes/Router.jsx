@@ -38,14 +38,16 @@ const Router = () => {
     <Routes>
       <Route path={ROUTES.ROOT} element={<CardsPage />} />
       <Route path={ROUTES.CARDS} element={<CardsPage />} />
-      <Route path={`${ROUTES.CARD_INFO}/:id`} element={<CardDetailsPage />} />
-      <Route path={`${ROUTES.EDIT_CARD}/:id`} element={<EditCardPage />} />
-
+      <Route
+        path={`${ROUTES.CARD_INFO}/:cardId`}
+        element={<CardDetailsPage />}
+      />
+      <Route path={`${ROUTES.EDIT_CARD}/:cardId`} element={<EditCardPage />} />
       <Route path={ROUTES.FAV_CARDS} element={<FavCardsPage />} />
       <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
       <Route path={ROUTES.CREATE_CARD} element={<CreateCardPage />} />
 
-      <Route path={`${ROUTES.EDIT_USER}/:id`} element={<EditUserPage />} />
+      <Route path={ROUTES.EDIT_USER} element={<EditUserPage />} />
       <Route path={ROUTES.CREATE_CARD} element={<CreateCardPage />} />
 
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />

@@ -1,21 +1,21 @@
 import { shape, string, number, arrayOf, oneOfType } from "prop-types";
-import addressType from "./addressType";
-import imageType from "./imageType";
+import addressType from "../../cards/models/types/addressType";
+import imageType from "../../cards/models/types/imageType";
 
-const cardType = shape({
+const userType = shape({
   _id: string,
-  title: string.isRequired,
-  subtitle: string.isRequired,
-  description: string.isRequired,
+  name: arrayOf(string),
   address: addressType.isRequired,
   image: imageType.isRequired,
   bizNumber: number.isRequired,
   phone: string.isRequired,
+  web: oneOfType([string]).isRequired,
   email: string.isRequired,
   user_id: string.isRequired,
   createdAt: string.isRequired,
-  likes: arrayOf(string).isRequired,
-  web: oneOfType([string]).isRequired,
+  isbusiness:string.isRequired,
+  isAdmin:string.isRequired,
+
 });
 
-export default cardType;
+export default userType;

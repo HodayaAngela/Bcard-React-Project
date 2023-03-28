@@ -1,45 +1,46 @@
-import React, { useEffect } from "react";
-
-import { useUser } from "../../users/providers/UserProvider";
-// import PropTypes from "prop-types";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import useForm from "../../forms/hooks/useForm";
-import normalizeCard from "../helpers/normalization/normalizeCard";
-import mapCardToModel from "../helpers/normalization/mapCardToModel";
-import initialCardForm from "./../helpers/initialForms/initialCardForm";
+import initialCardForm from "../helpers/initialForms/initialCardForm";
 import cardSchema from "../models/joi-schemas/cardSchema";
-import useCards from "./../hooks/useCards";
+import useCards from "../hooks/useCards";
+import { useUser } from "../../users/providers/UserProvider";
+import { useNavigate, Navigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 import { Container } from "@mui/material";
+import { useParams } from "react-router-dom";
+import mapCardToModel from "../helpers/normalization/mapCardToModel";
+import normalizeCard from "./../helpers/normalization/normalizeCard";
 import CardForm from "../components/CardForm";
 
 const EditCardPage = () => {
-  const { handleUpdateCard, handleGetCard, card } = useCards();
+  const { cardId } = useParams();
+  const {
+    handleUpdateCard,
+    handleGetCard,
+    value: { card },
+  } = useCards();
 
-  // Dynamic secondary routing
-  const { id } = useParams();
-
-  const navigate = useNavigate();
   const { user } = useUser();
+  const navigate = useNavigate();
 
-  const { value, ...rest } = useForm(initialCardForm, cardSchema, () => {
+  const { value, ...rest } = useForm(initialCardForm, cardSchema, () =>
     handleUpdateCard(card._id, {
       ...normalizeCard({ ...value.data }),
       bizNumber: card.bizNumber,
       user_id: card.user_id,
-    });
-  });
+    })
+  );
 
-  // .preventDefault();
   useEffect(() => {
-    handleGetCard(id).then((data) => {
-      if (!user || user._id !== data.user_id) navigate(ROUTES.CARDS);
+    handleGetCard(cardId).then((data) => {
+      if (user._id !== data.user_id) return navigate(ROUTES.CARDS);
       const modeledCard = mapCardToModel(data);
       rest.setData(modeledCard);
     });
-  }, [id, handleGetCard, navigate, rest, user]);
+  }, []);
 
-  // if (!user) return <Navigate replace to={ROUTES.CARDS} />;
+  if (!user) return <Navigate replace to={ROUTES.CARDS} />;
+
   return (
     <Container
       sx={{
@@ -50,7 +51,7 @@ const EditCardPage = () => {
       }}
     >
       <CardForm
-        title="Edit Card"
+        title="edit card"
         onSubmit={rest.onSubmit}
         onReset={rest.handleReset}
         errors={value.errors}

@@ -28,7 +28,8 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
       transformOrigin={{
         vertical: "top",
         horizontal: "right",
-      }}>
+      }}
+    >
       <Box>
         <MenuLink
           label="about"

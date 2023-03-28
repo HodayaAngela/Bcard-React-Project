@@ -1,9 +1,9 @@
-export const makeFirstLetterCapital = string => {
+export const makeFirstLetterCapital = (string) => {
   const term = string.toLowerCase().trim();
   return term.charAt(0).toUpperCase() + term.slice(1);
 };
 
-export const makeEveryFirstLetterCapital = text => {
+export const makeEveryFirstLetterCapital = (text) => {
   const term = text.toLowerCase().trim();
   const splitText = term.split(" ");
 
@@ -40,7 +40,7 @@ export function sortReverseArrayOfObject(array, key) {
 
 export const filterArrayOfObjectsByTerm = (term, array, key) => {
   const searchTerm = term.trim();
-  const arrayFiltered = array.filter(object => {
+  const arrayFiltered = array.filter((object) => {
     return object[key].toLowerCase().includes(searchTerm.toLowerCase());
   });
   return arrayFiltered;
@@ -48,7 +48,7 @@ export const filterArrayOfObjectsByTerm = (term, array, key) => {
 
 export const generateUniqNumber = (array, key) => {
   const random = randomNumBetween(1_000_000, 9_999_999);
-  const item = array.findIndex(item => item[key] === random);
+  const item = array.findIndex((item) => item[key] === random);
   if (item === -1) return random;
   generateUniqNumber(array, key);
 };

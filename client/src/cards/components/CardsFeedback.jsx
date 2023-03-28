@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Cards from "./Cards";
 import cardType from "../models/types/cardType";
 // import cardType from "./../models/types/cardType";
+import { makeFirstLetterCapital } from "../../utils/algoMethods";
 
 const CardsFeedback = ({
   title,
@@ -20,7 +21,7 @@ const CardsFeedback = ({
   if (cards && !cards.length)
     return (
       <Typography variant="body1" color="initial">
-        {title}
+        {makeFirstLetterCapital(title)}
       </Typography>
     );
   if (cards) return <Cards cards={cards} onDelete={onDelete} onLike={onLike} />;

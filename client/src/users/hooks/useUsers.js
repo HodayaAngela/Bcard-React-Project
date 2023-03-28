@@ -1,6 +1,11 @@
 import { useState, useCallback } from "react";
 import useAxios from "../../hooks/useAxios";
-import { login, signup } from "./../services/userApiService";
+import {
+  editUserData,
+  getUserData,
+  login,
+  signup,
+} from "./../services/userApiService";
 import {
   getUser,
   removeToken,
@@ -52,7 +57,8 @@ const useUsers = () => {
   const handleLogout = useCallback(() => {
     removeToken();
     setUser(null);
-  }, [setUser]);
+    navigate(ROUTES.CARDS);
+  }, [navigate, setUser]);
 
   const handleSignUp = useCallback(
     async (user) => {
@@ -71,6 +77,17 @@ const useUsers = () => {
     [handleLogin, requestStatus]
   );
 
+  const handleGetUser = useCallback(async (userId) => {
+    try {
+      setLoading(true);
+      const user = await getUserData(userId);
+      requestStatus(false, null, null, user);
+      return user;
+    } catch (error) {
+      requestStatus(false, error, null);
+    }
+  }, []);
+
   const handleGetUsers = useCallback(
     async (userId) => {
       try {
@@ -85,6 +102,22 @@ const useUsers = () => {
     },
     [requestStatus, snack]
   );
+
+  const handleUpdateUser = useCallback(async (userId, userFromClient) => {
+    try {
+      setLoading(true);
+      const user = await editUserData(userId, userFromClient);
+      requestStatus(false, null, null, user);
+      handleLogout();
+      snack(
+        "success",
+        "The business user has been successfully updated, now sign in again"
+      );
+    } catch (error) {
+      requestStatus(false, error, null);
+    }
+  }, []);
+
   return {
     isLoading,
     error,
@@ -93,7 +126,9 @@ const useUsers = () => {
     handleLogin,
     handleLogout,
     handleSignUp,
+    handleGetUser,
     handleGetUsers,
+    handleUpdateUser,
   };
 };
 

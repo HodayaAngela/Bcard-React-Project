@@ -16,6 +16,8 @@ This is a web application developed using React on the client-side and Node.js o
 
 [My repository on Github](https://github.com/HodayaAngela)
 
+[My linkedin](https://www.linkedin.com/in/hodaya-angela-d-a24156178/)
+
 ## installations
 
 To run this project, install it locally using npm:

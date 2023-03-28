@@ -20,7 +20,6 @@ const useForm = (initialForm, schema, handleSubmit) => {
     },
     [schema]
   );
-
   const handleChange = useCallback(
     ({ target }) => {
       const { name, value } = target;
@@ -42,17 +41,9 @@ const useForm = (initialForm, schema, handleSubmit) => {
   const validateForm = useCallback(() => {
     const schemaForValidate = Joi.object(schema);
     const { error } = schemaForValidate.validate(data);
-    if (error) return error.message;
+    if (error) return error;
     return null;
   }, [schema, data]);
-
-  const onSubmitForEdit = useCallback(
-    (event) => {
-      event.preventDefault();
-      handleSubmit(data);
-    },
-    [handleSubmit, data]
-  );
 
   const onSubmit = useCallback(() => {
     handleSubmit(data);
@@ -69,7 +60,6 @@ const useForm = (initialForm, schema, handleSubmit) => {
     handleReset,
     validateForm,
     setData,
-    onSubmitForEdit,
   };
 };
 

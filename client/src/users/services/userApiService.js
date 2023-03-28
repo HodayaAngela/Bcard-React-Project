@@ -19,3 +19,54 @@ export const signup = async (normalizedUser) => {
     return Promise.reject(error.message);
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const { data } = await axios.get(`${apiUrl}/users`);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
+
+export const getUserData = async (userId) => {
+  try {
+    const { data } = await axios.get(`${apiUrl}/users/${userId}`);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
+
+export const editUserData = async (userId, normalaizedUser) => {
+  try {
+    const { data } = await axios.put(
+      `${apiUrl}/users/${userId}`,
+      normalaizedUser
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
+
+export const deleteUser = async (userId) => {
+  try {
+    const { data } = await axios.delete(`${apiUrl}/users/${userId}`);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
+
+export const changeBusinessStatus = async (userId, normalaizedUser) => {
+  try {
+    const { data } = await axios.patch(
+      `${apiUrl}/users/${userId}`,
+      normalaizedUser
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};

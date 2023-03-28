@@ -1,7 +1,7 @@
 import JwtDecode from "jwt-decode";
 const TOKEN = "token";
 
-export const setTokenInLocalStorage = encryptedToken => {
+export const setTokenInLocalStorage = (encryptedToken) => {
   return localStorage.setItem(TOKEN, encryptedToken);
 };
 
@@ -9,7 +9,7 @@ export const getUser = () => {
   try {
     const user = localStorage.getItem(TOKEN);
     return JwtDecode(user);
-  } catch {
+  } catch (error) {
     return null;
   }
 };

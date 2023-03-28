@@ -15,20 +15,20 @@ const {
 const validateCard = require("../validations/cardValidationService");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/my-cards", auth, async (req, res) => {
   try {
-    const cards = await getCards();
-    return res.send(cards);
+    const { _id } = req.user;
+    const card = await getMyCards(_id);
+    return res.send(card);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
   }
 });
 
-router.get("/my-cards", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const cardUserId = req.user._id;
-    const card = await getMyCards(cardUserId);
-    return res.send(card);
+    const cards = await getCards();
+    return res.send(cards);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
   }
@@ -39,16 +39,6 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params;
     const card = await getCard(id);
     return res.send(card);
-  } catch (error) {
-    return handleError(res, error.status || 500, error.message);
-  }
-});
-
-router.get("fav-cards/:cardUserId", auth, async (req, res) => {
-  try {
-    const cardUserId = req.params.userId;
-    const cards = await getFavoriteCards(cardUserId);
-    return res.send(cards);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
   }
@@ -77,20 +67,19 @@ router.post("/", auth, async (req, res) => {
 
 router.put("/:id", auth, async (req, res) => {
   try {
+    let cardId = req.params.id;
     let card = req.body;
-    const cardId = req.params.id;
-    const cardUserId = req.user._id;
-
-    if (cardUserId !== card.user_id) {
-      const message =
-        "Authorization Error: Only the user who created the business card can update its details";
-      return handleError(res, 403, message);
-    }
+    let { _id, isBusiness } = req.user;
+    if ((!isBusiness && _id !== card.user_id) || _id !== card.user_id)
+      return handleError(
+        res,
+        403,
+        "Authorization Error: You must be an business type user to update a  card"
+      );
 
     const { error } = validateCard(card);
     if (error)
       return handleError(res, 400, `Joi Error: ${error.details[0].message}`);
-
     card = await normalizeCard(card);
     card = await updateCard(cardId, card);
     return res.send(card);
