@@ -59,7 +59,7 @@ export const deleteUser = async (userId) => {
   }
 };
 
-export const changeBusinessStatus = async (userId, normalaizedUser) => {
+export const changeBizStatus = async (userId, normalaizedUser) => {
   try {
     const { data } = await axios.patch(
       `${apiUrl}/users/${userId}`,

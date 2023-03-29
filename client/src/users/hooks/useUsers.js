@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import useAxios from "../../hooks/useAxios";
 import {
+  changeBizStatus,
+  deleteUser,
   editUserData,
   getUserData,
   login,
@@ -118,6 +120,33 @@ const useUsers = () => {
     }
   }, []);
 
+  const handleDeleteUser = useCallback(
+    async (userId) => {
+      try {
+        setLoading(true);
+        await deleteUser(userId);
+        snack("success", "The business card has been successfully deleted");
+      } catch (error) {
+        requestStatus(false, error, null);
+      }
+    },
+    [snack]
+  );
+
+  const handleChangeBizStatus = useCallback(
+    async (userId, userFromClient) => {
+      try {
+        setLoading(true);
+        const user = await changeBizStatus(userId, userFromClient);
+        requestStatus(false, null, users, user);
+        snack("success", "The business user has been successfully updated");
+      } catch (error) {
+        requestStatus(false, error, null);
+      }
+    },
+    [requestStatus, snack, users]
+  );
+
   return {
     isLoading,
     error,
@@ -129,6 +158,8 @@ const useUsers = () => {
     handleGetUser,
     handleGetUsers,
     handleUpdateUser,
+    handleDeleteUser,
+    handleChangeBizStatus,
   };
 };
 

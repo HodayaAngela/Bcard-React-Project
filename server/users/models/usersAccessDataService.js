@@ -76,16 +76,24 @@ const getUser = async (userId) => {
   return Promise.resolve("get user not in mongodb");
 };
 
-const updateUser = async (userId, normalizedUser) => {
+const updateUser = async (id, normalizeUser) => {
   if (DB === "MONGODB") {
     try {
-      return Promise.resolve({ normalizedUser, userId });
+      let user = await User.findByIdAndUpdate(id, await normalizeUser, {
+        new: true,
+      }).select(["-password", "-__v"]);
+
+      if (!user)
+        throw new Error(
+          "Could not update this user because a user with this ID cannot be found in the database"
+        );
+      return Promise.resolve(user);
     } catch (error) {
-      error.status = 400;
-      return Promise.reject(error);
+      error.status = 404;
+      return handleBadRequest("Mongoose", error);
     }
   }
-  return Promise.resolve("card update not in mongodb");
+  return Promise.resolve("User Updated!");
 };
 
 const changeUserBusinessStatus = async (userId) => {

@@ -11,7 +11,8 @@ import Users from "../components/Users";
 
 const CrmPage = () => {
   const { user } = useUser();
-  const { handleGetUsers,handleDeleteUser,handleChangeBusinessStatus, value } = useUsers();
+  const { handleGetUsers, handleDeleteUser, handleChangeBizStatus, value } =
+    useUsers();
   const { error, isLoading, users } = value;
   const navigate = useNavigate();
 
@@ -26,10 +27,9 @@ const CrmPage = () => {
   };
 
   const onUpdateUser = async (userId) => {
-    await handleChangeBusinessStatus(userId,user);
+    await handleChangeBizStatus(userId, user);
     await handleGetUsers();
   };
-
 
   return (
     <Container>
@@ -45,9 +45,9 @@ const CrmPage = () => {
       {users && (
         <Users
           users={users}
-          onDelete={(parmas) => (id) =>{
-             onDeleteUser(parmas.id)}
-          }
+          onDelete={(parmas) => (id) => {
+            onDeleteUser(parmas.id);
+          }}
           onChangeStatus={(parmas) => (id) => {
             onUpdateUser(parmas.id);
           }}

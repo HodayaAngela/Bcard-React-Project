@@ -11,7 +11,8 @@ import { useSearchParams } from "react-router-dom";
 const SearchBar = () => {
   const { isDark } = useTheme();
   const [searchParams, setSearch] = useSearchParams();
-  const handleChange = ({ target }) => setSearch({ q: target.value });
+  const handleChange = ({ target }) =>
+    setSearch({ q: target.value.toLowerCase() });
 
   return (
     <Box display="inline-flex">

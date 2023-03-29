@@ -87,19 +87,27 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   try {
-    const { id } = req.params;
-    let user = req.body;
-    const { error } = validateUserUpdate(user);
-    if (error)
-      return handleError(res, 400, `Joi Error: ${error.details[0].message}`);
+    let rawUser = req.body;
+    const userId = req.params.id;
+    const { _id } = req.user;
 
-    user = normalizeUser(user);
-    user = await updateUser(id, user);
-    return res.send(user);
+    if (_id !== userId)
+      return handleError(
+        res,
+        403,
+        "Authorization Error: You must the registered user to update this user details"
+      );
+
+    rawUser = await normalizeUser(rawUser);
+
+    rawUser = await updateUser(userId, rawUser);
+
+    return res.send(rawUser);
   } catch (error) {
-    return handleError(res, error.status || 500, error.message);
+    const { status } = error;
+    return handleError(res, status || 500, error.message);
   }
 });
 

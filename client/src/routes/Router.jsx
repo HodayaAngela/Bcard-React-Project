@@ -32,6 +32,7 @@ import MyCardsPage from "../cards/pages/MyCardsPage";
 import CreateCardPage from "../cards/pages/CreateCardPage";
 import EditCardPage from "../cards/pages/EditCardPage";
 import EditUserPage from "../users/pages/EditUserPage";
+import CrmPage from "../users/pages/CrmPage";
 
 const Router = () => {
   return (
@@ -51,6 +52,7 @@ const Router = () => {
       <Route path={ROUTES.CREATE_CARD} element={<CreateCardPage />} />
 
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+      <Route path={ROUTES.CRM} element={<CrmPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
 

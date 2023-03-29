@@ -66,6 +66,9 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
               navigateTo={ROUTES.EDIT_USER}
               onClick={onClose}
             />
+            {user && user.isAdmin && (
+              <MenuLink label="CRM" navigateTo={ROUTES.CRM} onClick={onClose} />
+            )}
 
             <MenuItem onClick={onLogout}>Logout</MenuItem>
           </>
