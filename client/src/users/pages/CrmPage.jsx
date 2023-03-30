@@ -17,7 +17,6 @@ const CrmPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user || !user.isAdmin) return navigate(ROUTES.CARDS);
     handleGetUsers();
   }, [handleGetUsers, navigate, user]);
 
@@ -34,14 +33,12 @@ const CrmPage = () => {
   return (
     <Container>
       <PageHeader
-        title="CRM system"
+        title="CRM SYSTEM"
         subtitle="Here you can find a CRM system of all the users"
       />
       {isLoading && <Spinner />}
-      {error && <Error errorMessage={error} />}
-      {!users && (
-        <Typography>Oops... it seems there are no users to display</Typography>
-      )}
+      {!users && error && <Error errorMessage={error} />}
+
       {users && (
         <Users
           users={users}

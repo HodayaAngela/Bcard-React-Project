@@ -5,6 +5,7 @@ import {
   deleteUser,
   editUserData,
   getUserData,
+  getUsers,
   login,
   signup,
 } from "./../services/userApiService";
@@ -18,16 +19,16 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "./../../routes/routesModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSnack } from "../../providers/SnackbarProvider";
+import { useMemo } from "react";
 
 const useUsers = () => {
   const [users, setUsers] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
-
+  const { user, setUser, setToken } = useUser();
   useAxios();
   const snack = useSnack();
   const navigate = useNavigate();
-  const { user, setUser, setToken } = useUser();
 
   const requestStatus = useCallback(
     (loading, errorMessage, users, user = null) => {
@@ -90,20 +91,16 @@ const useUsers = () => {
     }
   }, []);
 
-  const handleGetUsers = useCallback(
-    async (userId) => {
-      try {
-        setLoading(true);
-        const user = await getUser(userId);
-        requestStatus(false, null, null, user);
-        snack("success", "user imported from DB ");
-        return user;
-      } catch (error) {
-        requestStatus(false, error, null);
-      }
-    },
-    [requestStatus, snack]
-  );
+  const handleGetUsers = useCallback(async () => {
+    try {
+      setLoading(true);
+      const users = await getUsers();
+      requestStatus(false, null, users, user);
+      return users;
+    } catch (error) {
+      requestStatus(false, error, null);
+    }
+  }, [requestStatus, user]);
 
   const handleUpdateUser = useCallback(async (userId, userFromClient) => {
     try {
@@ -147,11 +144,18 @@ const useUsers = () => {
     [requestStatus, snack, users]
   );
 
+  const value = useMemo(
+    () => ({
+      isLoading,
+      error,
+      user,
+      users,
+    }),
+    [isLoading, error, user, users]
+  );
+
   return {
-    isLoading,
-    error,
-    user,
-    users,
+    value,
     handleLogin,
     handleLogout,
     handleSignUp,

@@ -7,7 +7,7 @@ import CachedIcon from "@mui/icons-material/Cached";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 
-const Users = ({ users, onDelete, onChangeStatus, handleGetUser }) => {
+const Users = ({ users, onDelete, onChangeStatus }) => {
   const navigate = useNavigate();
   const columns = [
     { field: "idNumber", headerName: "Number", width: 90 },
@@ -79,9 +79,9 @@ const Users = ({ users, onDelete, onChangeStatus, handleGetUser }) => {
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
-          onRowClick={(params) =>
-            navigate(`${ROUTES.USER_PROFILE}/${params.id}`)
-          }
+          // onRowClick={(params) =>
+          //   navigate(`${ROUTES.USER_PROFILE}/${params.id}`)
+          // }
         ></DataGrid>
       </div>
     </>
