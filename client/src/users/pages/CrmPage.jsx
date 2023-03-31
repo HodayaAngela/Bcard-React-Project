@@ -34,32 +34,27 @@ const CrmPage = () => {
   return (
     <Container>
       <PageHeader
+        style={{
+          paddingLeft: "60px",
+          paddingRight: "60px",
+          textAlign: "center",
+        }}
         title="CRM SYSTEM"
-        subtitle={
-          <div
-            style={{
-              paddingLeft: "60px",
-              paddingRight: "60px",
-              textAlign: "center",
-            }}
-          >
-            Welcome to our platform, designed to provide a seamless and
+        subtitle="Welcome to our platform, designed to provide a seamless and
             user-friendly experience for viewing and managing user profiles and
-            their status.
-          </div>
-        }
+            their status."
       />
       {isLoading && <Spinner />}
       {!users && error && <Error errorMessage={error} />}
 
-      {users && (
+      {users && user.isAdmin && (
         <Users
           users={users}
-          onDelete={(parmas) => (id) => {
-            onDeleteUser(parmas.id);
+          onDelete={(params) => (id) => {
+            onDeleteUser(params.id);
           }}
-          onChangeStatus={(parmas) => (id) => {
-            onUpdateUser(parmas.id);
+          onChangeStatus={(params) => (id) => {
+            onUpdateUser(params.id);
           }}
         />
       )}

@@ -9,7 +9,7 @@ const {
   getUsers,
   getUser,
   updateUser,
-  changeUserBusinessStatus,
+  changeUserBizStatus,
   deleteUser,
 } = require("../models/usersAccessDataService");
 
@@ -110,10 +110,17 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", auth, async (req, res) => {
   try {
+    const { _id } = req.user;
     const { id } = req.params;
-    const user = await changeUserBusinessStatus(id);
+    if (_id !== id && !req.user.isAdmin)
+      return handleError(
+        res,
+        403,
+        "Authorization Error: You must the registered user or admin to change this user status"
+      );
+    const user = await changeUserBizStatus(id);
     return res.send(user);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);

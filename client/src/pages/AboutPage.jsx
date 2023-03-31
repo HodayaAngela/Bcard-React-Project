@@ -48,7 +48,6 @@ const AboutPage = () => {
           }}
         >
           <img
-            // src="/assets/images/business-card1.webp"
             src="https://source.unsplash.com/random/?business"
             alt="card"
             width="90%"
