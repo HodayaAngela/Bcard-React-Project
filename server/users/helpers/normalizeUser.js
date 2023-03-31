@@ -1,27 +1,24 @@
-const normalizeUser = (rawUser) => {
-  const name = { ...rawUser.name, middle: rawUser.name.middle || "" };
-
+const normalizeUser = (rawUser, userId) => {
+  const { url, alt } = rawUser.image;
   const image = {
-    ...rawUser.image,
-    url:
-      rawUser.image.url ||
-      "https://media.istockphoto.com/id/175436790/photo/user-icon.jpg?s=612x612&w=0&k=20&c=zMOlQqLGfjkM5Mx1W4yoxe5G78Hy3RGZ3wzszEpVuWc=",
-    alt: rawUser.image.alt || "Business card image",
+    url: url || "https://source.unsplash.com/random/?business",
+    alt: alt || "Business user image",
   };
 
-  const address = {
-    ...rawUser.address,
-    state: rawUser.address.state || "not defined",
-  };
-
-  const user = {
+  return {
     ...rawUser,
-    name,
+    name: {
+      ...rawUser.name,
+      middle: rawUser.name.middle || "",
+    },
     image,
-    address,
+    address: {
+      ...rawUser.address,
+      state: rawUser.address.state || "",
+    },
+    isAdmin: rawUser.isAdmin || false,
+    user_id: rawUser.user_id || userId,
   };
-
-  return user;
 };
 
 module.exports = normalizeUser;

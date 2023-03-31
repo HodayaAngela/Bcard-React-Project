@@ -33,6 +33,7 @@ import CreateCardPage from "../cards/pages/CreateCardPage";
 import EditCardPage from "../cards/pages/EditCardPage";
 import EditUserPage from "../users/pages/EditUserPage";
 import CrmPage from "../users/pages/CrmPage";
+import ProfilePage from "../users/pages/ProfilePage";
 
 const Router = () => {
   return (
@@ -48,10 +49,13 @@ const Router = () => {
       <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
       <Route path={ROUTES.CREATE_CARD} element={<CreateCardPage />} />
 
-      <Route path={ROUTES.EDIT_USER} element={<EditUserPage />} />
       <Route path={ROUTES.CREATE_CARD} element={<CreateCardPage />} />
 
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+
+      <Route path={ROUTES.USER_PROFILE} element={<ProfilePage />} />
+      <Route path={ROUTES.EDIT_USER} element={<EditUserPage />} />
+
       <Route path={ROUTES.CRM} element={<CrmPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />

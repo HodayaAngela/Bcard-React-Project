@@ -15,9 +15,10 @@ export const UserProvider = ({ children }) => {
     }
   }, [user]);
 
-  const value = useMemo(() => {
-    return { user, setUser, token, setToken };
-  }, [user, token]);
+  const value = useMemo(
+    () => ({ user, setUser, token, setToken }),
+    [user, token]
+  );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

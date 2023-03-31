@@ -80,16 +80,19 @@ const useUsers = () => {
     [handleLogin, requestStatus]
   );
 
-  const handleGetUser = useCallback(async (userId) => {
-    try {
-      setLoading(true);
-      const user = await getUserData(userId);
-      requestStatus(false, null, null, user);
-      return user;
-    } catch (error) {
-      requestStatus(false, error, null);
-    }
-  }, []);
+  const handleGetUser = useCallback(
+    async (userId) => {
+      try {
+        setLoading(true);
+        const user = await getUserData(userId);
+        requestStatus(false, null, null, user);
+        return user;
+      } catch (error) {
+        requestStatus(false, error, null);
+      }
+    },
+    [requestStatus]
+  );
 
   const handleGetUsers = useCallback(async () => {
     try {
@@ -102,20 +105,23 @@ const useUsers = () => {
     }
   }, [requestStatus, user]);
 
-  const handleUpdateUser = useCallback(async (userId, userFromClient) => {
-    try {
-      setLoading(true);
-      const user = await editUserData(userId, userFromClient);
-      requestStatus(false, null, null, user);
-      handleLogout();
-      snack(
-        "success",
-        "The business user has been successfully updated, now sign in again"
-      );
-    } catch (error) {
-      requestStatus(false, error, null);
-    }
-  }, []);
+  const handleUpdateUser = useCallback(
+    async (userId, userFromClient) => {
+      try {
+        setLoading(true);
+        const user = await editUserData(userId, userFromClient);
+        requestStatus(false, null, null, user);
+        handleLogout();
+        snack(
+          "success",
+          "The business user has been successfully updated, now sign in again"
+        );
+      } catch (error) {
+        requestStatus(false, error, null);
+      }
+    },
+    [handleLogout, requestStatus, snack]
+  );
 
   const handleDeleteUser = useCallback(
     async (userId) => {
@@ -127,7 +133,7 @@ const useUsers = () => {
         requestStatus(false, error, null);
       }
     },
-    [snack]
+    [snack, requestStatus]
   );
 
   const handleChangeBizStatus = useCallback(
@@ -143,14 +149,8 @@ const useUsers = () => {
     },
     [requestStatus, snack, users]
   );
-
   const value = useMemo(
-    () => ({
-      isLoading,
-      error,
-      user,
-      users,
-    }),
+    () => ({ isLoading, error, user, users }),
     [isLoading, error, user, users]
   );
 

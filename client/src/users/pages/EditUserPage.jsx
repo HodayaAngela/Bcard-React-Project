@@ -15,7 +15,11 @@ import userSchema from "../models/joi-schema/userSchema";
 
 const EditUserPage = () => {
   const navigate = useNavigate();
-  const { handleUpdateUser, handleGetUser, user } = useUsers();
+  const {
+    handleUpdateUser,
+    handleGetUser,
+    value: { user },
+  } = useUsers();
 
   //  Create a new object containing the remaining properties. Calling an arrow function that updates the user when the form is submitted.
   const { value, ...rest } = useForm(initialUserForm, userSchema, () => {
@@ -27,9 +31,12 @@ const EditUserPage = () => {
 
   // Fetching user data from the server, transform it into the desired format, and update the state of the component with the retrieved data.
   useEffect(() => {
-    handleGetUser(user._id).then((data) => {
-      if (!user._id) return navigate(ROUTES.CARDS);
+    // if (!user || !user._id) {
+    //   navigate(ROUTES.CARDS);
+    //   return;
+    // }
 
+    handleGetUser(user._id).then((data) => {
       const modeledUser = mapUserNoPassword(data);
       rest.setData(modeledUser);
     });

@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import PageHeader from "../../components/PageHeader";
 import Spinner from "../../components/Spinner";
 import Error from "../../components/Error";
-import { Avatar, Box, Typography, Grid } from "@mui/material";
+import { Avatar, Typography, Grid } from "@mui/material";
 import mapUserToModel from "../helpers/normalization/mapUserToModel";
 
 const ProfilePage = () => {
@@ -13,17 +13,19 @@ const ProfilePage = () => {
   const { isLoading, error, user } = value;
 
   useEffect(() => {
-    handleGetUser(user._id).then((data) => {
-      const mapUser = mapUserToModel(data);
-      setUserData(mapUser);
-    });
+    if (user) {
+      handleGetUser(user._id).then((data) => {
+        const mapUser = mapUserToModel(data);
+        setUserData(mapUser);
+      });
+    }
   }, [handleGetUser, user._id]);
 
   return (
     <Container>
       <PageHeader
-        title="User Details"
-        subtitle="Here you can find more details about your User"
+        title="User Information"
+        subtitle="Here, you can view detailed information about your user account."
       />
       {isLoading && <Spinner />}
       {error && <Error errorMessage={error} />}
@@ -38,45 +40,39 @@ const ProfilePage = () => {
             justifyContent="center"
           >
             <Grid item>
-              
-                <Typography
-                  variant="h4"
-                  color="initial"
-                >{`First name: ${userData.first}`}</Typography>
-                <Typography
-                  variant="h4"
-                  color="initial"
-                >{`Last name : ${userData.last}`}</Typography>
-                <Typography
-                  variant="h4"
-                  color="initial"
-                >{`Email : ${userData.email}`}</Typography>
-                <Typography
-                  variant="h4"
-                  color="initial"
-                >{`Phone : ${userData.phone}`}</Typography>
-                <Typography
-                  variant="h4"
-                  color="initial"
-                >{`Address : ${userData.street} ${userData.houseNumber}  ${userData.city}`}</Typography>
-                   <Typography
-                  variant="h4"
-                  color="initial"
-                >{`Buseness: ${user.isBusiness}`}</Typography>
-                     <Typography
-                  variant="h4"
-                  color="initial"
-                >{`Admin : ${user.isAdmin}`}</Typography>
-             
+              <Typography
+                variant="h4"
+                color="initial"
+              >{`First name: ${userData.first}`}</Typography>
+              <Typography
+                variant="h4"
+                color="initial"
+              >{`Last name : ${userData.last}`}</Typography>
+              <Typography
+                variant="h4"
+                color="initial"
+              >{`Email : ${userData.email}`}</Typography>
+              <Typography
+                variant="h4"
+                color="initial"
+              >{`Phone : ${userData.phone}`}</Typography>
+              <Typography
+                variant="h4"
+                color="initial"
+              >{`Address : ${userData.street} ${userData.houseNumber}  ${userData.city}`}</Typography>
+              <Typography variant="h4" color="initial">{`Business: ${
+                user?.isBusiness || false
+              }`}</Typography>
+              <Typography variant="h4" color="initial">{`Admin: ${
+                user?.isAdmin || false
+              }`}</Typography>
             </Grid>
-            <Grid item >
-              
-                <Avatar
-                  alt="busienes card img"
-                  src={userData.url}
-                  sx={{ width: 350, height: 350 }}
-                />
-          
+            <Grid item>
+              <Avatar
+                alt="Business card img"
+                src={userData.url}
+                sx={{ width: 350, height: 350 }}
+              />
             </Grid>
           </Grid>
         </>

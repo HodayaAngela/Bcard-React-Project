@@ -17,6 +17,7 @@ const CrmPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user || !user.isAdmin) return navigate(ROUTES.CARDS);
     handleGetUsers();
   }, [handleGetUsers, navigate, user]);
 
@@ -34,7 +35,19 @@ const CrmPage = () => {
     <Container>
       <PageHeader
         title="CRM SYSTEM"
-        subtitle="Here you can find a CRM system of all the users"
+        subtitle={
+          <div
+            style={{
+              paddingLeft: "60px",
+              paddingRight: "60px",
+              textAlign: "center",
+            }}
+          >
+            Welcome to our platform, designed to provide a seamless and
+            user-friendly experience for viewing and managing user profiles and
+            their status.
+          </div>
+        }
       />
       {isLoading && <Spinner />}
       {!users && error && <Error errorMessage={error} />}

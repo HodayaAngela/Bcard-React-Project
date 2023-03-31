@@ -96,25 +96,43 @@ const updateUser = async (id, normalizeUser) => {
   return Promise.resolve("User Updated!");
 };
 
-const changeUserBusinessStatus = async (userId) => {
+const changeUserBizStatus = async (id) => {
   if (DB === "MONGODB") {
     try {
-      return Promise.resolve(`user no. ${userId} change his business status!`);
+      const pipeline = [{ $set: { isBusiness: { $not: "$isBusiness" } } }];
+      const user = await User.findByIdAndUpdate(id, pipeline, {
+        new: true,
+      }).select(["-password", "-__v", "-isAdmin"]);
+
+      if (!user)
+        throw new Error(
+          "Could not update this user isBusiness status because a user with this ID cannot be found in the database"
+        );
+      return Promise.resolve(user);
     } catch (error) {
-      error.status = 400;
-      return Promise.reject(error);
+      error.status = 404;
+      return handleBadRequest("Mongoose", error);
     }
   }
-  return Promise.resolve("card liked not in mongodb");
+
+  return Promise.resolve("Card Updated!");
 };
 
-const deleteUser = async (userId) => {
+const deleteUser = async (id) => {
   if (DB === "MONGODB") {
     try {
-      return Promise.resolve(`user no. ${userId} deleted!`);
+      let user = await User.findByIdAndDelete(id, {
+        password: 0,
+        isAdmin: 0,
+        __v: 0,
+      });
+      if (!user)
+        throw new Error(
+          "Could not delete this user because a user with this ID cannot be found in the database"
+        );
+      return Promise.resolve(user);
     } catch (error) {
-      error.status = 400;
-      return Promise.reject(error);
+      return handleBadRequest("Mongoose", error);
     }
   }
   return Promise.resolve("card deleted not in mongodb");
@@ -125,5 +143,5 @@ exports.loginUser = loginUser;
 exports.getUsers = getUsers;
 exports.getUser = getUser;
 exports.updateUser = updateUser;
-exports.changeUserBusinessStatus = changeUserBusinessStatus;
+exports.changeUserBizStatus = changeUserBizStatus;
 exports.deleteUser = deleteUser;

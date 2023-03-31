@@ -72,7 +72,6 @@ router.get("/:id", auth, async (req, res) => {
   try {
     const { id } = req.params;
     const { _id, isAdmin } = req.user;
-
     if (_id !== id && !isAdmin)
       return handleError(
         res,

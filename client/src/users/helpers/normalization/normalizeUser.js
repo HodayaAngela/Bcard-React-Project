@@ -4,7 +4,7 @@ const normalizeUser = (user) => ({
     middle: user.middle,
     last: user.last,
   },
-  password : user.password,
+  password: user.password,
   phone: user.phone,
   email: user.email,
   address: {

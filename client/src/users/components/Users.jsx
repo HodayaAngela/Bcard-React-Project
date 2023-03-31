@@ -4,11 +4,10 @@ import userType from "../types/userType";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CachedIcon from "@mui/icons-material/Cached";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routes/routesModel";
+// import { useNavigate } from "react-router-dom";
 
 const Users = ({ users, onDelete, onChangeStatus }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const columns = [
     { field: "idNumber", headerName: "Number", width: 90 },
     { field: "firstName", headerName: "First name", width: 130 },
