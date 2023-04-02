@@ -2,6 +2,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 import PageHeader from "./../components/PageHeader";
 import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
 
 const AboutPage = () => {
   return (
@@ -38,6 +39,24 @@ const AboutPage = () => {
           <br /> <br />
           Join us on this exciting journey of discovery and inspiration –
           download Biz Card today!
+          <br /> <br />
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            <strong>
+              {" "}
+              To log in to the application, you can use any of the following
+              user accounts:{" "}
+            </strong>{" "}
+            <br />
+            with the password:Aa1234!
+            <br />
+            Email: regular@gmail.com
+            <br />
+            Email: business@gmail.com
+            <br />
+            Email: admin@gmail.com
+            <br />
+            Alternatively, you can register to create a new account and log in.
+          </Typography>
         </Grid>
         <Grid
           item

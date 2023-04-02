@@ -57,11 +57,6 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
         {user && (
           <>
             <MenuLink
-              label="about"
-              navigateTo={ROUTES.ABOUT}
-              onClick={onClose}
-            />
-            <MenuLink
               label="profile"
               navigateTo={ROUTES.USER_PROFILE}
               onClick={onClose}
@@ -82,7 +77,7 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
                 onClick={onClose}
               />
             )}
-            {user.isAdmin && user.isBusiness && (
+            {(user.isAdmin || user.isBusiness) && (
               <MenuLink
                 label="My Cards"
                 navigateTo={ROUTES.MY_CARDS}

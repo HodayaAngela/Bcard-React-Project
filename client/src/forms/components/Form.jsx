@@ -29,7 +29,7 @@ const Form = ({
       autoComplete="off"
       noValidate
     >
-      <Typography align="center" variant="h5" component="h1" mb={2}>
+      <Typography align="center" variant="h4" component="h1" mb={2}>
         {title.toUpperCase()}
       </Typography>
 
