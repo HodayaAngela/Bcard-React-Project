@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useCards from "../hooks/useCards";
 import mapCardToModel from "../helpers/normalization/mapCardToModel";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Input, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { useUser } from "../../users/providers/UserProvider";
 
 const CardDetailsPage = () => {
   // Dynamic secondary routing
   const { cardId } = useParams();
-  const { handleGetCard } = useCards();
+
+  const { user } = useUser();
+  const { handleGetCard, handleAdminNumber } = useCards();
+
   const [cardData, setCardData] = useState("");
 
   useEffect(() => {
@@ -40,9 +44,32 @@ const CardDetailsPage = () => {
         />
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
-            <Typography component="div" variant="h5">
+            <Typography component="div" variant="h4">
               {cardData.title}
             </Typography>
+
+            <Typography variant="h6" color="-moz-initial">
+              Business card number: {cardData.bizNumber}
+            </Typography>
+
+            <Box sx={{ display: user && user.isAdmin ? "block" : "none" }}>
+              <Input
+                name="bizNumber"
+                label="bizNumber"
+                type="number"
+                onChange={(e) => (cardData.bizNumber = e.target.value)}
+                placeholder={`${cardData.bizNumber}`}
+              />
+              <Button
+                variant="text"
+                color="primary"
+                onClick={() => handleAdminNumber(cardId, cardData)}
+              >
+                Update number
+              </Button>
+              <br />
+            </Box>
+            <br />
             <Typography
               variant="subtitle1"
               color="text.secondary"
@@ -50,6 +77,7 @@ const CardDetailsPage = () => {
             >
               {cardData.description}
             </Typography>
+
             <Typography
               variant="subtitle1"
               color="text.secondary"

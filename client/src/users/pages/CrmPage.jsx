@@ -8,11 +8,16 @@ import { useUser } from "../providers/UserProvider";
 import Spinner from "../../components/Spinner";
 import Error from "../../components/Error";
 import Users from "../components/Users";
+import UsersCardFeedback from "../components/UsersCardFeedback";
 
 const CrmPage = () => {
   const { user } = useUser();
-  const { handleGetUsers, handleDeleteUser, handleChangeBizStatus, value } =
-    useUsers();
+  const {
+    handleGetUsers,
+    handleDeleteUser,
+    handleChangeBusinessStatus,
+    value,
+  } = useUsers();
   const { error, isLoading, users } = value;
   const navigate = useNavigate();
 
@@ -27,7 +32,7 @@ const CrmPage = () => {
   };
 
   const onUpdateUser = async (userId) => {
-    await handleChangeBizStatus(userId, user);
+    await handleChangeBusinessStatus(userId, user);
     await handleGetUsers();
   };
 
@@ -44,17 +49,20 @@ const CrmPage = () => {
             user-friendly experience for viewing and managing user profiles and
             their status."
       />
-      {isLoading && <Spinner />}
-      {!users && error && <Error errorMessage={error} />}
 
-      {users && user.isAdmin && (
+      {isLoading && <Spinner />}
+      {error && <Error errorMessage={error} />}
+      {!users && (
+        <Typography>Oops... it seems there are no users to display</Typography>
+      )}
+      {users && (
         <Users
           users={users}
-          onDelete={(params) => (id) => {
-            onDeleteUser(params.id);
+          onDelete={(parmas) => (id) => {
+            onDeleteUser(parmas.id);
           }}
-          onChangeStatus={(params) => (id) => {
-            onUpdateUser(params.id);
+          onChangeStatus={(parmas) => (id) => {
+            onUpdateUser(parmas.id);
           }}
         />
       )}

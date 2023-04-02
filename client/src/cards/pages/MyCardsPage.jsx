@@ -12,7 +12,7 @@ import useCards from "../hooks/useCards";
 const MyCardsPage = () => {
   const { user } = useUser();
   const { value, handleGetMyCards, handleDeleteCard } = useCards();
-  const { isLoading, error, cards } = value;
+  const { isLoading, error, filteredCards } = value;
 
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const MyCardsPage = () => {
         subtitle="Welcome to our business card creator page, where you can easily access and manage your existing business cards and create new ones at your convenience."
       />
 
-      {cards && (
+      {filteredCards && (
         <Fab
           onClick={() => navigate(ROUTES.CREATE_CARD)}
           color="primary"
@@ -52,7 +52,7 @@ const MyCardsPage = () => {
       <CardsFeedback
         isLoading={isLoading}
         error={error}
-        cards={cards}
+        cards={filteredCards}
         onDelete={onDeleteCard}
         title="Currently, you have not created a business card. However, you can create one by using the button below:"
       />

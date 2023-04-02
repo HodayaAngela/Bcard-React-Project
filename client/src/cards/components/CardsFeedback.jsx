@@ -31,7 +31,6 @@ const CardsFeedback = ({
 CardsFeedback.propTypes = {
   isLoading: bool.isRequired,
   error: string,
-  // cards: arrayOf(object),
   cards: arrayOf(cardType),
   onDelete: func.isRequired,
   onLike: func.isRequired,

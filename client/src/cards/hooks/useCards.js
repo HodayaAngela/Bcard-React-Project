@@ -1,5 +1,6 @@
 import { useCallback, useState, useMemo } from "react";
 import {
+  adminNumber,
   changeLikeStatus,
   createCard,
   deleteCard,
@@ -60,7 +61,7 @@ const useCards = () => {
       requestStatus(false, null, cards);
       snack("success", "Cards imported from DB");
     } catch (error) {
-      requestStatus(false, error.message, null);
+      requestStatus(false, error, null);
     }
   }, []);
 
@@ -169,6 +170,21 @@ const useCards = () => {
     [handleGetCardsForLikes]
   );
 
+  const handleAdminNumber = useCallback(
+    async (cardId, cardFromClient) => {
+      try {
+        setLoading(true);
+        const normalizedCard = normalizeCard(cardFromClient);
+        const card = await adminNumber(cardId, normalizedCard);
+        requestStatus(false, null, cards, card);
+        snack("success", "The business card has been successfully updated");
+      } catch (error) {
+        requestStatus(false, error, null);
+      }
+    },
+    [cards, snack]
+  );
+
   const value = useMemo(() => {
     return { isLoading, cards, card, error, filteredCards };
   }, [isLoading, cards, card, error, filteredCards]);
@@ -183,6 +199,7 @@ const useCards = () => {
     handleUpdateCard,
     handleDeleteCard,
     handleLikeCard,
+    handleAdminNumber,
     requestStatus,
   };
 };

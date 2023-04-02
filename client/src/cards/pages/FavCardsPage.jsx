@@ -11,12 +11,12 @@ const FavCardsPage = () => {
   // Will be displayed to a regular user
   const { user } = useUser();
   const { value, ...rest } = useCards();
-  const { isLoading, error, cards } = value;
+  const { isLoading, error, filteredCards } = value;
   const { handleDeleteCard, handleGetFavCards } = rest;
 
   useEffect(() => {
     handleGetFavCards();
-  }, [user, handleGetFavCards]);
+  }, [handleGetFavCards]);
 
   const onDeleteCard = useCallback(
     async (cardId) => {
@@ -43,7 +43,7 @@ const FavCardsPage = () => {
       <CardsFeedback
         isLoading={isLoading}
         error={error}
-        cards={cards}
+        cards={filteredCards}
         onDelete={onDeleteCard}
         onLike={changeLikeStatus}
         title="You have not yet selected cards of your preference"

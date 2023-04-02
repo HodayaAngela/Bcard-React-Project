@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import useAxios from "../../hooks/useAxios";
 import {
   changeBizStatus,
@@ -15,7 +15,7 @@ import {
   setTokenInLocalStorage,
 } from "../services/localStorageService";
 import { useUser } from "../providers/UserProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import ROUTES from "./../../routes/routesModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSnack } from "../../providers/SnackbarProvider";
@@ -26,8 +26,33 @@ const useUsers = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const { user, setUser, setToken } = useUser();
-  useAxios();
+  const [query, setQuery] = useState("");
+  const [filteredUsers, setFilter] = useState(null);
+  const [searchParams] = useSearchParams();
   const snack = useSnack();
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (users) {
+      setFilter(
+        Array.isArray(users)
+          ? users.filter(
+              (registeredUser) =>
+                registeredUser.name.first.includes(query) ||
+                registeredUser.name.last.includes(query) ||
+                registeredUser.email.includes(query) ||
+                registeredUser.phone.includes(query)
+            )
+          : []
+      );
+    }
+  }, [users, query]);
+
+  useAxios();
+
   const navigate = useNavigate();
 
   const requestStatus = useCallback(
@@ -99,7 +124,6 @@ const useUsers = () => {
       setLoading(true);
       const users = await getUsers();
       requestStatus(false, null, users, user);
-      return users;
     } catch (error) {
       requestStatus(false, error, null);
     }
@@ -150,7 +174,7 @@ const useUsers = () => {
     [requestStatus, snack, users]
   );
   const value = useMemo(
-    () => ({ isLoading, error, user, users }),
+    () => ({ isLoading, error, user, users, filteredUsers }),
     [isLoading, error, user, users]
   );
 

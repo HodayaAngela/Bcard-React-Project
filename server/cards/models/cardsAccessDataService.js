@@ -29,6 +29,21 @@ const getMyCards = async (userId) => {
   return Promise.resolve([]);
 };
 
+const getMyLikesCards = async (userId) => {
+  if (DB === "MONGODB") {
+    try {
+      const cards = await Card.find({});
+      const filterCards = cards.find((id) => (cards.likes = userId));
+
+      return Promise.resolve(filterCards);
+    } catch (error) {
+      error.status = 404;
+      return handleBadRequest("Mongoose", error);
+    }
+  }
+  return Promise.resolve([]);
+};
+
 const getCard = async (id) => {
   if (DB === "MONGODB") {
     try {
@@ -157,4 +172,5 @@ exports.createCard = createCard;
 exports.updateCard = updateCard;
 exports.likeCard = likeCard;
 exports.deleteCard = deleteCard;
+exports.getMyLikesCards = getMyLikesCards;
 exports.adminNumber = adminNumber;

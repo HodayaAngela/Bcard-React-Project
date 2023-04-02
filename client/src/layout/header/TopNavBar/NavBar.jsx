@@ -7,11 +7,22 @@ import RightNavBar from "./right-navigation/RightNavBar";
 import SearchBar from "./right-navigation/SearchBar";
 import { MenuProvider } from "./menu/MenuProvider";
 import { createTheme } from "@mui/material/styles";
+import { useTheme } from "../../../providers/ThemeProvider";
 export const NavBar = () => {
+  const { isDark } = useTheme();
+
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#004d40",
+        main: isDark ? "#212121" : "#004d40",
+      },
+      background: {
+        default: isDark ? "#424242" : "#fafafa",
+        paper: isDark ? "#616161" : "#fff",
+      },
+      text: {
+        primary: isDark ? "#fff" : "#212121",
+        secondary: isDark ? "#e0e0e0" : "#757575",
       },
     },
   });

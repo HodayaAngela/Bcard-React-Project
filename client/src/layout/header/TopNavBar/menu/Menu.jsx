@@ -57,6 +57,11 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
         {user && (
           <>
             <MenuLink
+              label="about"
+              navigateTo={ROUTES.ABOUT}
+              onClick={onClose}
+            />
+            <MenuLink
               label="profile"
               navigateTo={ROUTES.USER_PROFILE}
               onClick={onClose}
@@ -66,8 +71,30 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
               navigateTo={ROUTES.EDIT_USER}
               onClick={onClose}
             />
-            {user && user.isAdmin && (
+
+            {user.isAdmin && (
               <MenuLink label="CRM" navigateTo={ROUTES.CRM} onClick={onClose} />
+            )}
+            {!user.isAdmin && !user.isBusiness && (
+              <MenuLink
+                label="FAV CARDS"
+                navigateTo={ROUTES.FAV_CARDS}
+                onClick={onClose}
+              />
+            )}
+            {user.isAdmin && user.isBusiness && (
+              <MenuLink
+                label="My Cards"
+                navigateTo={ROUTES.MY_CARDS}
+                onClick={onClose}
+              />
+            )}
+            {user.isAdmin && (
+              <MenuLink
+                label="Sandbox"
+                navigateTo={ROUTES.SANDBOX}
+                onClick={onClose}
+              />
             )}
 
             <MenuItem onClick={onLogout}>Logout</MenuItem>

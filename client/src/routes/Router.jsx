@@ -53,7 +53,12 @@ const Router = () => {
 
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
 
-      <Route path={ROUTES.USER_PROFILE} element={<ProfilePage />} />
+      <Route path={ROUTES.USER_PROFILE} element={<ProfilePage />}>
+        <Route
+          path={`${ROUTES.USER_PROFILE}/:userId`}
+          element={<ProfilePage />}
+        />
+      </Route>
       <Route path={ROUTES.EDIT_USER} element={<EditUserPage />} />
 
       <Route path={ROUTES.CRM} element={<CrmPage />} />

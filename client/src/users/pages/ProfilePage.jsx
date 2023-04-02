@@ -69,8 +69,8 @@ const ProfilePage = () => {
             </Grid>
             <Grid item>
               <Avatar
-                alt="Business card img"
-                src={userData.url}
+                alt="User card img"
+                src="https://source.unsplash.com/random/?USER-PROFILE"
                 sx={{ width: 350, height: 350 }}
               />
             </Grid>
