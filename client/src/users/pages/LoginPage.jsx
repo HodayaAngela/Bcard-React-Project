@@ -29,14 +29,16 @@ const LoginPage = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-      }}>
+      }}
+    >
       <Form
         onSubmit={rest.onSubmit}
         onReset={rest.handleReset}
         onChange={rest.validateForm}
         title="login"
         styles={{ maxWidth: "450px" }}
-        to={ROUTES.CARDS}>
+        to={ROUTES.CARDS}
+      >
         <Input
           label="email"
           name="email"

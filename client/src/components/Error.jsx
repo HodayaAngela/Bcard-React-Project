@@ -1,8 +1,8 @@
-import React from "react";
-import { string } from "prop-types";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import React from 'react';
+import { string } from 'prop-types';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 const Error = ({ errorMessage }) => {
   return (
@@ -22,7 +22,7 @@ const Error = ({ errorMessage }) => {
         </Grid>
         <Grid item xs={12} md={4} justifyContent="center">
           <img
-            style={{ borderRadius: "30px" }}
+            style={{ borderRadius: '30px' }}
             width="70%"
             src="/assets/images/oops.jpg"
             alt="broken robot"
