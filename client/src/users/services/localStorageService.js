@@ -1,8 +1,9 @@
-import JwtDecode from "jwt-decode";
-const TOKEN = "token";
+import JwtDecode from 'jwt-decode';
+const TOKEN = 'token';
 
-export const setTokenInLocalStorage = (encryptedToken) =>
-  localStorage.setItem(TOKEN, encryptedToken);
+export const setTokenInLocalStorage = (encryptedToken) => {
+  return localStorage.setItem(TOKEN, encryptedToken);
+};
 
 export const getUser = () => {
   try {
