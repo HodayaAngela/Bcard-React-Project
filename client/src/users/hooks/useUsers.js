@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from "react";
-import useAxios from "../../hooks/useAxios";
+import { useState, useCallback, useEffect } from 'react';
+import useAxios from '../../hooks/useAxios';
 import {
   changeBizStatus,
   deleteUser,
@@ -8,31 +8,31 @@ import {
   getUsers,
   login,
   signup,
-} from "./../services/userApiService";
+} from './../services/userApiService';
 import {
   getUser,
   removeToken,
   setTokenInLocalStorage,
-} from "../services/localStorageService";
-import { useUser } from "../providers/UserProvider";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import ROUTES from "./../../routes/routesModel";
-import normalizeUser from "../helpers/normalization/normalizeUser";
-import { useSnack } from "../../providers/SnackbarProvider";
-import { useMemo } from "react";
+} from '../services/localStorageService';
+import { useUser } from '../providers/UserProvider';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import ROUTES from './../../routes/routesModel';
+import normalizeUser from '../helpers/normalization/normalizeUser';
+import { useSnack } from '../../providers/SnackbarProvider';
+import { useMemo } from 'react';
 
 const useUsers = () => {
   const [users, setUsers] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const { user, setUser, setToken } = useUser();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [filteredUsers, setFilter] = useState(null);
   const [searchParams] = useSearchParams();
   const snack = useSnack();
 
   useEffect(() => {
-    setQuery(searchParams.get("q") ?? "");
+    setQuery(searchParams.get('q') ?? '');
   }, [searchParams]);
 
   useEffect(() => {
@@ -137,8 +137,8 @@ const useUsers = () => {
         requestStatus(false, null, null, user);
         handleLogout();
         snack(
-          "success",
-          "The business user has been successfully updated, now sign in again"
+          'success',
+          'The business user has been successfully updated, now sign in again'
         );
       } catch (error) {
         requestStatus(false, error, null);
@@ -152,7 +152,7 @@ const useUsers = () => {
       try {
         setLoading(true);
         await deleteUser(userId);
-        snack("success", "The business card has been successfully deleted");
+        snack('success', 'The business card has been successfully deleted');
       } catch (error) {
         requestStatus(false, error, null);
       }
@@ -166,7 +166,7 @@ const useUsers = () => {
         setLoading(true);
         const user = await changeBizStatus(userId, userFromClient);
         requestStatus(false, null, users, user);
-        snack("success", "The business user has been successfully updated");
+        snack('success', 'The business user has been successfully updated');
       } catch (error) {
         requestStatus(false, error, null);
       }
@@ -175,7 +175,7 @@ const useUsers = () => {
   );
   const value = useMemo(
     () => ({ isLoading, error, user, users, filteredUsers }),
-    [isLoading, error, user, users]
+    [isLoading, error, user, users, filteredUsers]
   );
 
   return {
