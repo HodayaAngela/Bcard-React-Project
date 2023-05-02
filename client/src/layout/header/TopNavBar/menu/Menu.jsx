@@ -1,10 +1,10 @@
-import MuiMenu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Box from "@mui/material/Box";
-import ROUTES from "../../../../routes/routesModel";
-import { useUser } from "../../../../users/providers/UserProvider";
-import useUsers from "../../../../users/hooks/useUsers";
-import MenuLink from "./MenuLink";
+import MuiMenu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+import ROUTES from '../../../../routes/routesModel';
+import { useUser } from '../../../../users/providers/UserProvider';
+import useUsers from '../../../../users/hooks/useUsers';
+import MenuLink from './MenuLink';
 
 const Menu = ({ isOpen, anchorEl, onClose }) => {
   const { user } = useUser();
@@ -21,13 +21,13 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
       onClose={onClose}
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
     >
       <Box>
@@ -35,7 +35,7 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
           label="about"
           navigateTo={ROUTES.ABOUT}
           onClick={onClose}
-          styles={{ display: { xs: "block", md: "none" } }}
+          styles={{ display: { xs: 'block', md: 'none' } }}
         />
 
         {!user && (
@@ -44,13 +44,13 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
               label="login"
               navigateTo={ROUTES.LOGIN}
               onClick={onClose}
-              styles={{ display: { xs: "block", md: "none" } }}
+              styles={{ display: { xs: 'block', md: 'none' } }}
             />
             <MenuLink
               label="signup"
               navigateTo={ROUTES.SIGNUP}
               onClick={onClose}
-              styles={{ display: { xs: "block", md: "none" } }}
+              styles={{ display: { xs: 'block', md: 'none' } }}
             />
           </>
         )}
@@ -70,13 +70,13 @@ const Menu = ({ isOpen, anchorEl, onClose }) => {
             {user.isAdmin && (
               <MenuLink label="CRM" navigateTo={ROUTES.CRM} onClick={onClose} />
             )}
-            {!user.isAdmin && !user.isBusiness && (
-              <MenuLink
-                label="FAV CARDS"
-                navigateTo={ROUTES.FAV_CARDS}
-                onClick={onClose}
-              />
-            )}
+
+            <MenuLink
+              label="FAV CARDS"
+              navigateTo={ROUTES.FAV_CARDS}
+              onClick={onClose}
+            />
+
             {(user.isAdmin || user.isBusiness) && (
               <MenuLink
                 label="My Cards"

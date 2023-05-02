@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Box, IconButton } from "@mui/material";
-import CardActions from "@mui/material/CardActions";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import CallIcon from "@mui/icons-material/Call";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { arrayOf, func, string } from "prop-types";
-import { useUser } from "../../../users/providers/UserProvider";
-import CardDeleteDialog from "./CardDeleteDialog";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "../../../routes/routesModel";
-import useCards from "../../hooks/useCards";
+import React, { useState } from 'react';
+import { Box, IconButton } from '@mui/material';
+import CardActions from '@mui/material/CardActions';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import CallIcon from '@mui/icons-material/Call';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { arrayOf, func, string } from 'prop-types';
+import { useUser } from '../../../users/providers/UserProvider';
+import CardDeleteDialog from './CardDeleteDialog';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../../routes/routesModel';
+import useCards from '../../hooks/useCards';
 
 const CardActionBar = ({ onDelete, cardId, cardLikes, onLike, cardUserId }) => {
   // userFromLocalStorage:
@@ -33,7 +33,7 @@ const CardActionBar = ({ onDelete, cardId, cardLikes, onLike, cardUserId }) => {
   );
 
   const handleDialog = (term) => {
-    if (term === "open") return setDialog(true);
+    if (term === 'open') return setDialog(true);
     setDialog(false);
   };
 
@@ -61,7 +61,7 @@ const CardActionBar = ({ onDelete, cardId, cardLikes, onLike, cardUserId }) => {
     <>
       <CardActions
         disableSpacing
-        sx={{ pt: 0, justifyContent: "space-between" }}
+        sx={{ pt: 0, justifyContent: 'space-between' }}
       >
         <Box>
           {/* 5.3 + 5.4 */}
@@ -70,7 +70,7 @@ const CardActionBar = ({ onDelete, cardId, cardLikes, onLike, cardUserId }) => {
             (user.isAdmin || (user.isBusiness && user._id === cardUserId)) && (
               <IconButton
                 aria-label="delete card"
-                onClick={() => handleDialog("open")}
+                onClick={() => handleDialog('open')}
               >
                 <DeleteIcon />
               </IconButton>
@@ -95,9 +95,9 @@ const CardActionBar = ({ onDelete, cardId, cardLikes, onLike, cardUserId }) => {
           </IconButton>
 
           {/* 5.2 */}
-          {user && !user.isAdmin && !user.isBusiness && (
+          {user && (
             <IconButton aria-label="add to favorites" onClick={handleLike}>
-              <FavoriteIcon color={isLiked ? "error" : "inherit"} />
+              <FavoriteIcon color={isLiked ? 'error' : 'inherit'} />
             </IconButton>
           )}
         </Box>
