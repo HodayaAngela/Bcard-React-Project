@@ -64,12 +64,11 @@ nmp start
 
 #### Business users:
 
-- Cannot view favorite cards and sandbox.
+- Cannot view sandbox.
 - Can delete their own cards.
 
 #### Admin users:
 
-- Cannot view favorite cards.
 - Cannot view CRM card.
 - Can delete any card.
 - Can create and edit only the cards created by them.
