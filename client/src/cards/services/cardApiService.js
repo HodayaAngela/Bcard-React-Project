@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8181";
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8181';
 
 export const getCards = async () => {
   try {
@@ -52,7 +52,7 @@ export const editCard = async (cardId, normalaizedCard) => {
 
 export const changeLikeStatus = async (cardId, likeStatus) => {
   if (!cardId) {
-    return Promise.reject("Card ID is undefined or null");
+    return Promise.reject('Card ID is undefined or null');
   }
   try {
     const { data } = await axios.patch(`${apiUrl}/cards/${cardId}`, {

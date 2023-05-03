@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from "react";
-import { useUser } from "../../users/providers/UserProvider";
-import { Navigate } from "react-router-dom";
-import ROUTES from "../../routes/routesModel";
-import useCards from "../hooks/useCards";
-import { Container } from "@mui/system";
-import PageHeader from "../../components/PageHeader";
-import CardsFeedback from "../components/CardsFeedback";
+import React, { useCallback, useEffect } from 'react';
+import { useUser } from '../../users/providers/UserProvider';
+import { Navigate } from 'react-router-dom';
+import ROUTES from '../../routes/routesModel';
+import useCards from '../hooks/useCards';
+import { Container } from '@mui/system';
+import PageHeader from '../../components/PageHeader';
+import CardsFeedback from '../components/CardsFeedback';
 
 const FavCardsPage = () => {
   // Will be displayed to a regular user
@@ -31,8 +31,7 @@ const FavCardsPage = () => {
   }, [handleGetFavCards]);
 
   // 2.2 + 5.2
-  if (!user || user.isAdmin || user.isBusiness)
-    return <Navigate replace to={ROUTES.CARDS} />;
+  if (!user) return <Navigate replace to={ROUTES.CARDS} />;
 
   return (
     <Container>

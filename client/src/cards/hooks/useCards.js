@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState, useMemo } from 'react';
 import {
   adminNumber,
   changeLikeStatus,
@@ -8,14 +8,14 @@ import {
   getCard,
   getCards,
   getMyCards,
-} from "./../services/cardApiService";
-import useAxios from "../../hooks/useAxios";
-import normalizeCard from "./../helpers/normalization/normalizeCard";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useSnack } from "../../providers/SnackbarProvider";
-import ROUTES from "../../routes/routesModel";
-import { useUser } from "../../users/providers/UserProvider";
-import { useEffect } from "react";
+} from './../services/cardApiService';
+import useAxios from '../../hooks/useAxios';
+import normalizeCard from './../helpers/normalization/normalizeCard';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSnack } from '../../providers/SnackbarProvider';
+import ROUTES from '../../routes/routesModel';
+import { useUser } from '../../users/providers/UserProvider';
+import { useEffect } from 'react';
 // import { getFavoriteCards } from "../../../../server/cards/models/cardsAccessDataService";
 
 const useCards = () => {
@@ -25,12 +25,12 @@ const useCards = () => {
   const [error, setError] = useState(null);
   const [cards, setCards] = useState();
   const [card, setCard] = useState();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [filteredCards, setFilter] = useState(null);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    setQuery(searchParams.get("q") ?? "");
+    setQuery(searchParams.get('q') ?? '');
   }, [searchParams]);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const useCards = () => {
       setLoading(true);
       const cards = await getCards();
       requestStatus(false, null, cards);
-      snack("success", "Cards imported from DB");
+      snack('success', 'Cards imported from DB');
     } catch (error) {
       requestStatus(false, error, null);
     }
@@ -103,7 +103,7 @@ const useCards = () => {
         setLoading(true);
         const card = await editCard(cardId, cardFromClient);
         requestStatus(false, null, null, card);
-        snack("success", "The business card has been successfully updated");
+        snack('success', 'The business card has been successfully updated');
         navigate(ROUTES.MY_CARDS);
       } catch (error) {
         requestStatus(false, error, null);
@@ -119,7 +119,7 @@ const useCards = () => {
         const normalizedCard = normalizeCard(cardFromClient);
         const card = await createCard(normalizedCard);
         requestStatus(false, null, null, card);
-        snack("success", "A new business card has been created");
+        snack('success', 'A new business card has been created');
         navigate(ROUTES.MY_CARDS);
       } catch (error) {
         requestStatus(false, error.message, null);
@@ -134,7 +134,7 @@ const useCards = () => {
         setLoading(true);
         await deleteCard(cardId);
         requestStatus(false, null, cards, null);
-        snack("success", "The business card has been deleted");
+        snack('success', 'The business card has been deleted');
       } catch (error) {
         requestStatus(false, error.message, null);
       }
@@ -177,7 +177,7 @@ const useCards = () => {
         const normalizedCard = normalizeCard(cardFromClient);
         const card = await adminNumber(cardId, normalizedCard);
         requestStatus(false, null, cards, card);
-        snack("success", "The business card has been successfully updated");
+        snack('success', 'The business card has been successfully updated');
       } catch (error) {
         requestStatus(false, error, null);
       }
