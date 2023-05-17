@@ -1,16 +1,16 @@
-const chalk = require("chalk");
-const normalizeCard = require("../cards/helpers/normalizeCard");
-const { createCard } = require("../cards/models/cardsAccessDataService");
-const { registerUser } = require("../users/models/usersAccessDataService");
-const data = require("./initialData.json");
-const normalizeUser = require("../users/helpers/normalizeUser");
-const { generateUserPassword } = require("../users/helpers/bcrypt");
+const chalk = require('chalk');
+const normalizeCard = require('../cards/helpers/normalizeCard');
+const { createCard } = require('../cards/models/cardsAccessDataService');
+const { registerUser } = require('../users/models/usersAccessDataService');
+const data = require('./initialData.json');
+const normalizeUser = require('../users/helpers/normalizeUser');
+const { generateUserPassword } = require('../users/helpers/bcrypt');
 
 const generateInitialCards = async () => {
   const { cards } = data;
   cards.forEach(async (card) => {
     try {
-      const cardUserId = "6376274068d78742d84f31d2";
+      const cardUserId = '6376274068d78742d84f31d2';
       card = await normalizeCard(card, cardUserId);
       await createCard(card);
       return;

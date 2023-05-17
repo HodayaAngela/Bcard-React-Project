@@ -1,8 +1,8 @@
-const express = require("express");
-const auth = require("../../auth/authService");
-const { handleError } = require("../../utils/handleErrors");
-const { generateUserPassword } = require("../helpers/bcrypt");
-const normalizeUser = require("../helpers/normalizeUser");
+const express = require('express');
+const auth = require('../../auth/authService');
+const { handleError } = require('../../utils/handleErrors');
+const { generateUserPassword } = require('../helpers/bcrypt');
+const normalizeUser = require('../helpers/normalizeUser');
 const {
   registerUser,
   loginUser,
@@ -11,16 +11,16 @@ const {
   updateUser,
   changeUserBizStatus,
   deleteUser,
-} = require("../models/usersAccessDataService");
+} = require('../models/usersAccessDataService');
 
 const {
   validateRegistration,
   validateLogin,
   validateUserUpdate,
-} = require("../validations/userValidationService");
+} = require('../validations/userValidationService');
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     let user = req.body;
     const { error } = validateRegistration(user);
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     let user = req.body;
     const { error } = validateLogin(user);
@@ -51,14 +51,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const user = req.user;
     if (!user.isAdmin)
       return handleError(
         res,
         403,
-        "Authorization Error: You must be an admin user to see all users in the database"
+        'Authorization Error: You must be an admin user to see all users in the database'
       );
 
     const users = await getUsers();
@@ -68,7 +68,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
     const { _id, isAdmin } = req.user;
@@ -76,7 +76,7 @@ router.get("/:id", auth, async (req, res) => {
       return handleError(
         res,
         403,
-        "Authorization Error: You must be an admin type user or the registered user to see this user details"
+        'Authorization Error: You must be an admin type user or the registered user to see this user details'
       );
 
     const user = await getUser(id);
@@ -86,7 +86,7 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-router.put("/:id", auth, async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     let rawUser = req.body;
     const userId = req.params.id;
@@ -96,7 +96,7 @@ router.put("/:id", auth, async (req, res) => {
       return handleError(
         res,
         403,
-        "Authorization Error: You must the registered user to update this user details"
+        'Authorization Error: You must the registered user to update this user details'
       );
 
     rawUser = await normalizeUser(rawUser);
@@ -110,7 +110,7 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
-router.patch("/:id", auth, async (req, res) => {
+router.patch('/:id', auth, async (req, res) => {
   try {
     const { _id } = req.user;
     const { id } = req.params;
@@ -118,7 +118,7 @@ router.patch("/:id", auth, async (req, res) => {
       return handleError(
         res,
         403,
-        "Authorization Error: You must the registered user or admin to change this user status"
+        'Authorization Error: You must the registered user or admin to change this user status'
       );
     const user = await changeUserBizStatus(id);
     return res.send(user);
@@ -127,7 +127,7 @@ router.patch("/:id", auth, async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const user = await deleteUser(id);

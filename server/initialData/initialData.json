@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "name": { "first": "regular", "middle": "", "last": "user" },
+      "name": { "first": "regular", "last": "user" },
       "isBusiness": false,
       "phone": "050-0000000",
       "email": "regular@gmail.com",
@@ -12,10 +12,13 @@
         "street": "magnive",
         "houseNumber": "5"
       },
-      "image": { "url": "", "alt": "" }
+      "image": {
+        "url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+        "alt": "regular"
+      }
     },
     {
-      "name": { "first": "business", "middle": "", "last": "user" },
+      "name": { "first": "business", "last": "user" },
       "isBusiness": true,
       "phone": "050-0000000",
       "email": "business@gmail.com",
@@ -26,10 +29,13 @@
         "street": "magnive",
         "houseNumber": "5"
       },
-      "image": { "url": "", "alt": "" }
+      "image": {
+        "url": "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+        "alt": "business"
+      }
     },
     {
-      "name": { "first": "blogger", "middle": "", "last": "user" },
+      "name": { "first": "admin", "last": "user" },
       "isBusiness": true,
       "isAdmin": true,
       "phone": "050-0000000",
@@ -41,7 +47,10 @@
         "street": "magnive",
         "houseNumber": "5"
       },
-      "image": { "url": "", "alt": "" }
+      "image": {
+        "url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+        "alt": "admin"
+      }
     }
   ],
   "cards": [
@@ -53,8 +62,8 @@
       "email": "firstCard@gmail.com",
       "web": "https://www.test.co.il",
       "image": {
-        "url": "",
-        "alt": ""
+        "url": "https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_960_720.jpg",
+        "alt": "business card image"
       },
       "address": {
         "state": "",
@@ -73,8 +82,8 @@
       "email": "secondCard@gmail.com",
       "web": "https://www.test.co.il",
       "image": {
-        "url": "",
-        "alt": ""
+        "url": "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?ixlib=rb-4.0.3&ixid=mnwxmja3fdb8mhxzzwfyy2h8oxx8zmluyw5jzxxlbnwwfhwwfhw%3d&auto=format&fit=crop&w=500&q=60",
+        "alt": "business card image"
       },
       "address": {
         "state": "",
@@ -93,8 +102,8 @@
       "email": "thirdCard@gmail.com",
       "web": "https://www.test.co.il",
       "image": {
-        "url": "",
-        "alt": ""
+        "url": "https://cdn.pixabay.com/photo/2016/06/03/13/57/digital-marketing-1433427__340.jpg",
+        "alt": "business card image"
       },
       "address": {
         "state": "",

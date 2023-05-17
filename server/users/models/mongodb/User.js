@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const Address = require("./Address");
-const Image = require("./Image");
-const Name = require("./Name");
+const mongoose = require('mongoose');
+const Address = require('./Address');
+const Image = require('./Image');
+const Name = require('./Name');
 
 const schema = new mongoose.Schema({
   name: Name,
@@ -31,8 +31,10 @@ const schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  loginAttempts: { type: Number, default: 0 },
+  lastFailedAttempt: { type: Date, default: null },
 });
 
-const User = mongoose.model("user", schema);
+const User = mongoose.model('user', schema);
 
 module.exports = User;
