@@ -1,6 +1,6 @@
 # Business Card Web Application with REST API
 
-![BizCard](/client/public/assets/images/BizCard.png)
+![Business-Card](client/assets/images/../../public/assets/images/BizCard.PNG)
 
 This is a web application developed using React on the client-side and Node.js on the server-side. The application is designed to display business cards, with the option to edit and delete them. Users can also view their favorite cards and more. The UI is primarily developed using Material UI, and the application allows changing the lighting from black to colored and vice versa, making it more user-friendly and customizable.
 
